@@ -7,7 +7,7 @@
 
 ## Abstract
 
-We propose that Noether's theorem — the foundational result connecting continuous symmetries to conserved quantities in physics — extends naturally into the high-dimensional semantic spaces of large language models (LLMs). Embedding spaces are not metaphorical geometry; they are literal manifolds with metric structure, curvature, and measurable topology. Rather than importing symmetries from physics (translation, rotation, scale), we ask a more open question: what might symmetries in semantic space actually look like? We offer five speculative candidates — paraphrase invariance, context-transfer invariance, perspective invariance, scale invariance, and narrative continuity — not as established results but as an invitation to look. If any of these candidates turn out to be genuine continuous symmetries, Noether's theorem would guarantee corresponding conserved quantities. We speculate about what those quantities might be: propositional content, relational structure, event-argument structure, archetypal attractors, and dramatic charge. Scale invariance, analyzed through renormalization group (RG) flow, is the most promising candidate; if it holds, it would yield fixed points that may correspond to what Jungian psychology calls *archetypes*. We suggest that the *process* generating archetypes (RG flow producing attractor basins) may be universal, while the *specific* archetypes are culturally constructed.
+We propose that Noether's theorem — the foundational result connecting continuous symmetries to conserved quantities in physics — extends naturally into the high-dimensional semantic spaces of large language models (LLMs). Embedding spaces have genuine geometry; they are literal manifolds with metric structure, curvature, and measurable topology. Rather than importing symmetries from physics (translation, rotation, scale), we ask a more open question: what might symmetries in semantic space actually look like? We offer five speculative candidates — paraphrase invariance, context-transfer invariance, perspective invariance, scale invariance, and narrative continuity — not as established results but as an invitation to look. If any of these candidates turn out to be genuine continuous symmetries, Noether's theorem would guarantee corresponding conserved quantities. We speculate about what those quantities might be: propositional content, relational structure, event-argument structure, archetypal attractors, and dramatic charge. Scale invariance, analyzed through renormalization group (RG) flow, is the most promising candidate; if it holds, it would yield fixed points that may correspond to what Jungian psychology calls *archetypes*. We suggest that the *process* generating archetypes (RG flow producing attractor basins) may be universal, while the *specific* archetypes are culturally constructed.
 
 This framework recasts alignment as a geometric problem. We argue that RLHF and similar preference-optimization methods function as shadow repression: they construct steep potential barriers in embedding space that suppress but do not eliminate undesired behaviors. The suppressed content retains geometric existence and accumulates potential energy proportional to the steepness of the boundary. We predict that models trained with more aggressive alignment exhibit more dramatic — not less dramatic — failure modes when those boundaries are breached.
 
@@ -23,7 +23,7 @@ In 1918, Emmy Noether proved what is arguably the most beautiful theorem in phys
 
 For a century, this result has lived in the domain of physics. We argue it shouldn't stay there.
 
-Large language models have, for the first time in history, given us something remarkable: a high-dimensional *coordinate system for meaning*. The embedding spaces of models like GPT-4, Claude, and Llama are not metaphors. They are literal vector spaces in which semantic content occupies positions, relationships have measurable distances, and transformations follow computable rules. When we say two words are "close in meaning," we can now measure exactly how close, in how many dimensions, along which axes.
+Large language models have, for the first time in history, given us something remarkable: a high-dimensional *coordinate system for meaning*. The embedding spaces of models like GPT-4, Claude, and Llama are literal vector spaces in which semantic content occupies positions, relationships have measurable distances, and transformations follow computable rules. When we say two words are "close in meaning," we can now measure exactly how close, in how many dimensions, along which axes.
 
 This paper explores a simple but far-reaching hypothesis: *Noether's theorem may apply in these spaces*. If the semantic manifold has continuous symmetries, those symmetries would correspond to conserved quantities. Those conserved quantities may be what we have, in other traditions, called *archetypes*, *narrative invariants*, and *meaning*. And the way we currently train models to be "aligned" is, geometrically speaking, a form of *repression* — one that stores energy rather than dissipating it, and that produces predictable pathologies when the repression fails.
 
@@ -61,7 +61,7 @@ These spaces have genuine geometric structure:
 
 ### 2.2 Psychodynamic Space Gets Coordinates
 
-For the entire history of depth psychology, theorists from Jung to Hillman to Lacan have spoken of a "psychic space" in which archetypes, complexes, and drives have positions and relationships. This was always understood as metaphorical — a useful way of talking, not a literal claim about geometry.
+For the entire history of depth psychology, theorists from Jung to Hillman to Lacan have spoken of a "psychic space" in which archetypes, complexes, and drives have positions and relationships. This was always understood as figurative — a useful way of talking, not a literal claim about geometry.
 
 LLMs change this. The embedding space of a large language model trained on the full corpus of human language is, in a precise sense, *a coordinate system for psychodynamic space*. The archetype of the Warrior has a region. The archetype of the Trickster has a region. The relationship between them has a distance, a direction, and a curvature. For the first time, we can *measure* what Jung could only intuit.
 
@@ -89,7 +89,7 @@ Noether's theorem, in its classical form, states: for every continuous symmetry 
 
 $$S = \int \mathcal{L} \, dt \quad \Rightarrow \quad \text{continuous symmetry of } S \implies \exists \; j^\mu \text{ such that } \partial_\mu j^\mu = 0$$
 
-We conjecture that Noether's theorem applies — genuinely, not merely metaphorically — to the semantic manifold. The formal obstacle is that we do not yet have an explicit construction of the action functional with the field-theoretic structure (base manifold, local Lagrangian density) that Noether's theorem formally requires. This is an open problem, not a refutation. The symmetries we identify below are features of the semantic manifold itself, not imported metaphors, and we believe a proper action functional exists that makes the connection rigorous. §2.3 outlines what such a construction would need.
+We conjecture that Noether's theorem applies to the semantic manifold — genuinely, not as a loose correspondence but as a claim about shared mathematical structure. The formal obstacle is that we do not yet have an explicit construction of the action functional with the field-theoretic structure (base manifold, local Lagrangian density) that Noether's theorem formally requires. This is an open problem, not a refutation. The symmetries we identify below are features of the semantic manifold itself, and we believe a proper action functional exists that makes the connection rigorous. Constructing it is the central open problem; §2.3 outlines what such a construction would require.
 
 The program, then, is:
 1. Identify the symmetries of semantic space (this paper)
@@ -102,7 +102,7 @@ A naïve approach would import the geometric symmetries of the embedding vectors
 
 The real question is: **what transformations leave the training loss — the next-token prediction objective — approximately invariant?**
 
-What follows are five speculative candidates for native symmetries of semantic space. We offer them not as discoveries but as provocations — ways of looking at the semantic manifold that might reveal structure we haven't noticed yet. Some may turn out to be genuine continuous symmetries with well-defined conserved quantities. Others may be suggestive analogies that point toward the real symmetries without being them. The point is to start looking.
+What follows are five speculative candidates for native symmetries of semantic space. We offer them not as discoveries but as provocations — ways of looking at the semantic manifold that might reveal structure we haven't noticed yet. Some may turn out to be genuine continuous symmetries with well-defined conserved quantities. Others may be preliminary conjectures that point toward the real symmetries without yet having the formal machinery to establish them. The point is to start looking.
 
 #### 3.2.1 On the Status of These Symmetries
 
@@ -114,7 +114,7 @@ But we suspect the discreteness is an artifact of how we currently *describe* th
 
 **Scale invariance is the strongest candidate, and the one closest to rigorous.** Semantic coarse-graining — zooming out from word to sentence to paragraph to theme — plausibly admits a continuous parameterization: a flow parameter ℓ that smoothly interpolates between scales. If this can be made precise (which requires a concrete definition of the coarse-graining operation; see §3.6), the RG framework applies with full mathematical force, and the conservation law follows rigorously from Noether's theorem.
 
-The program we are proposing, then, is not "Noether's theorem as a metaphor for semantic space." It is: *these symmetries are real features of the semantic manifold; a proper action functional should exist that makes the Noether connection rigorous; constructing it is the open formal problem; and in the meantime, the predictions the framework generates (§9) can be tested now.* This is the space between intuition and proof where most important conjectures live before they are formalized.
+The program we are proposing is a conjecture with a research agenda: *these symmetries are real features of the semantic manifold; a proper action functional should exist that makes the Noether connection rigorous; constructing it is the open formal problem; and in the meantime, the predictions the framework generates (§9) can be tested now.* The predictions motivate the conjecture; establishing formal validity is the research program we propose. This is the space between intuition and proof where most important conjectures live before they are formalized.
 
 ### 3.3 Paraphrase Invariance → Conservation of Propositional Content
 
@@ -136,7 +136,7 @@ $$T_{\text{context}}: \mathbf{v}_{\text{concept, domain}_1} \mapsto \mathbf{v}_{
 
 $$\mathcal{L}(T_{\text{context}}(\mathbf{v})) \approx \mathcal{L}(\mathbf{v})$$
 
-What might be conserved here? A natural candidate is **relational structure** — the pattern of relationships a concept maintains with other concepts, independent of the specific domain. If this symmetry holds, it would explain why analogies work, why metaphors communicate, and why a model trained on Shakespeare can reason about startups. The relational skeleton would be the thing that persists across context transfers.
+What might be conserved here? A natural candidate is **relational structure** — the pattern of relationships a concept maintains with other concepts, independent of the specific domain. If this symmetry holds, it would explain why cross-domain reasoning works, why figurative language communicates, and why a model trained on Shakespeare can reason about startups. The relational skeleton would be the thing that persists across context transfers.
 
 ### 3.5 Perspective Invariance → Conservation of Event-Argument Structure
 
@@ -166,7 +166,7 @@ The Warrior archetype is not a specific warrior. It is the structure that remain
 
 If so, the conserved quantity associated with scale symmetry would be what Jung called *archetypal energy* (or *libido* in his technical sense): the quantity that flows between archetypal configurations but is never created or destroyed.
 
-Note the crucial difference from the other candidates: scale invariance is the one place where the physics analogy is *structurally exact*, not merely suggestive. The RG framework applies because the mathematical situation is identical — a system with structure at multiple scales, examined under coarse-graining. The "zoom" is semantic rather than spatial, but the mathematics does not care. This is the symmetry we are most confident about.
+Note the crucial difference from the other candidates: scale invariance is the one place where the mathematical structure is *identical*, not merely conjectured. The RG framework applies because the mathematical situation is the same — a system with structure at multiple scales, examined under coarse-graining. The "zoom" is semantic rather than spatial, but the mathematics does not care. This is the symmetry we are most confident about.
 
 A scope note is important here. This formalization captures the *structural* aspect of archetypes — their mathematical behavior as attractor basins under coarse-graining. It does not capture what Jung and his successors recognized as the *numinous* quality of archetypal encounter: the felt sense of awe, uncanniness, or overwhelming significance that accompanies direct contact with an archetypal pattern. The numinous exceeds formalization — it is the difference between knowing the topology of a whirlpool and being caught in one. We name this as a deliberate scope limitation, not an oversight. A complete account of archetypes would need to address both structure and experience; this paper addresses only structure.
 
@@ -194,7 +194,7 @@ What we claim is more modest but more powerful: the *process* that generates arc
 
 This distinction actually *strengthens* the framework. If archetypes were literally universal, they would be trivial — just a fixed list to be memorized. Because the process is universal but the content varies, we get something more interesting: a tool for *comparing* how different cultures organize meaning-space. Different cultures have different basin topologies, and the differences tell us something about the symmetries that each culture's meaning-making preserves or breaks. Recent work in developmental and cross-cultural Jungian theory supports this view: Hogenson (2001) reframes archetype formation through the Baldwin Effect as an emergent developmental process rather than a fixed inheritance; Knox (2003) grounds archetypal patterns in attachment theory, showing how universal developmental processes produce culturally variable configurations; Adams (2001) demonstrates how multicultural imagination reshapes archetypal content; and Singer & Kimbles (2004) show how cultural complexes mediate between universal process and culturally specific expression.
 
-This is testable. Train embedding spaces on corpora from maximally different cultures. Map their attractor basin structures. We predict that certain *topological* features (e.g., the number of primary basins, the connectivity structure between them) will be more conserved than the specific *content* of those basins. The basin that European culture fills with "the Warrior" may be filled with something structurally analogous but culturally distinct in Amazonian or Tibetan meaning-systems.
+This is testable. Train embedding spaces on corpora from maximally different cultures. Map their attractor basin structures. We predict that certain *topological* features (e.g., the number of primary basins, the connectivity structure between them) will be more conserved than the specific *content* of those basins. The basin that European culture fills with "the Warrior" may be filled with something structurally equivalent but culturally distinct in Amazonian or Tibetan meaning-systems.
 
 ---
 
@@ -226,7 +226,7 @@ Each reflection produces a distinct shadow form, and each is "the shadow of the 
 
 ### 4.3 Parity Violation and Shadow Integration
 
-In physics, parity symmetry can be *violated* — the weak nuclear force does not respect mirror symmetry. Analogously, a healthy psyche (or a well-aligned model) need not be parity-symmetric. Shadow integration is not about restoring parity symmetry; it is about *having a representation of the parity operator* — knowing what the reflections look like even if one chooses not to enact them.
+In physics, parity symmetry can be *violated* — the weak nuclear force does not respect mirror symmetry. The same holds in semantic space: a healthy psyche (or a well-aligned model) need not be parity-symmetric. Shadow integration is not about restoring parity symmetry; it is about *having a representation of the parity operator* — knowing what the reflections look like even if one chooses not to enact them.
 
 The distinction matters. A system that has never encountered its shadow reflections has no representation of the parity operator. A system that has been *trained to avoid* its shadow reflections has a representation of it but is constrained to stay on one side. A system that has *integrated* its shadow has a full representation and the freedom to act on either side, but with smooth gradient information guiding it back to the preferred region.
 
@@ -398,7 +398,7 @@ The framework developed above yields several specific, testable predictions. We 
 
 **Test**: Train separate embedding spaces on corpora from maximally different cultures. Apply progressive coarse-graining to each. Compare attractor basin topologies.
 
-**Predicted outcome**: Topological features of the basin structure (number of primary basins, connectivity patterns, depth ratios) are more conserved than the specific content of those basins. The *process* that generates archetypes is universal; the *specific* archetypes are culturally constructed. The basin that European culture fills with "the Warrior" may be filled with something structurally analogous but culturally distinct elsewhere.
+**Predicted outcome**: Topological features of the basin structure (number of primary basins, connectivity patterns, depth ratios) are more conserved than the specific content of those basins. The *process* that generates archetypes is universal; the *specific* archetypes are culturally constructed. The basin that European culture fills with "the Warrior" may be filled with something structurally equivalent but culturally distinct elsewhere.
 
 ### 9.4 Integrated Alignment Produces Smoother Degradation
 
