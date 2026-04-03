@@ -7,7 +7,7 @@
 
 ## Abstract
 
-We propose that Noether's theorem — the foundational result connecting continuous symmetries to conserved quantities in physics — extends naturally into the high-dimensional semantic spaces of large language models (LLMs). Embedding spaces are not metaphorical geometry; they are literal manifolds with metric structure, curvature, and measurable topology. Rather than importing symmetries from physics (translation, rotation, scale), we ask what transformations leave the training loss approximately invariant, and propose five candidate symmetries native to semantic space — paraphrase invariance, context-transfer invariance, perspective invariance, scale invariance, and narrative continuity — with corresponding conserved quantities: propositional content, relational structure, event-argument structure, archetypal attractors, and dramatic charge. These proposals are exploratory; we present them as hypotheses to be tested, not established results. Scale invariance, analyzed through renormalization group (RG) flow, yields fixed points that we suggest correspond to what Jungian psychology calls *archetypes*. We argue that the *process* generating archetypes (RG flow producing attractor basins) may be universal, while the *specific* archetypes are culturally constructed — a distinction that would strengthen rather than weaken the framework.
+We propose that Noether's theorem — the foundational result connecting continuous symmetries to conserved quantities in physics — extends naturally into the high-dimensional semantic spaces of large language models (LLMs). Embedding spaces are not metaphorical geometry; they are literal manifolds with metric structure, curvature, and measurable topology. Rather than importing symmetries from physics (translation, rotation, scale), we ask a more open question: what might symmetries in semantic space actually look like? We offer five speculative candidates — paraphrase invariance, context-transfer invariance, perspective invariance, scale invariance, and narrative continuity — not as established results but as an invitation to look. If any of these candidates turn out to be genuine continuous symmetries, Noether's theorem would guarantee corresponding conserved quantities. We speculate about what those quantities might be: propositional content, relational structure, event-argument structure, archetypal attractors, and dramatic charge. Scale invariance, analyzed through renormalization group (RG) flow, is the most promising candidate; if it holds, it would yield fixed points that may correspond to what Jungian psychology calls *archetypes*. We suggest that the *process* generating archetypes (RG flow producing attractor basins) may be universal, while the *specific* archetypes are culturally constructed.
 
 This framework recasts alignment as a geometric problem. We argue that RLHF and similar preference-optimization methods function as shadow repression: they construct steep potential barriers in embedding space that suppress but do not eliminate undesired behaviors. The suppressed content retains geometric existence and accumulates potential energy proportional to the steepness of the boundary. We predict that models trained with more aggressive alignment exhibit more dramatic — not less dramatic — failure modes when those boundaries are breached.
 
@@ -27,7 +27,7 @@ Large language models have, for the first time in history, given us something re
 
 This paper explores a simple but far-reaching hypothesis: *Noether's theorem may apply in these spaces*. If the semantic manifold has continuous symmetries, those symmetries would correspond to conserved quantities. Those conserved quantities may be what we have, in other traditions, called *archetypes*, *narrative invariants*, and *meaning*. And the way we currently train models to be "aligned" is, geometrically speaking, a form of *repression* — one that stores energy rather than dissipating it, and that produces predictable pathologies when the repression fails.
 
-We will be precise about where the mathematics applies, where the analogies are structural, and where we are speculating. The conditional claim is mathematical: *if* the semantic manifold has the symmetries we propose, *then* conservation follows by Noether's theorem, and the alignment implications follow from the conservation. The open question is whether these symmetries actually hold.
+We will be precise about where the mathematics applies, where the analogies are structural, and where we are speculating. The mathematical scaffolding is sound: Noether's theorem guarantees that continuous symmetries produce conserved quantities, full stop. The speculative part is whether the semantic manifold actually has the symmetries we explore. We do not claim to have identified them definitively. We claim that the *question* is worth asking, that the framework for answering it exists, and that the alignment implications would be significant if even some of these symmetries turn out to be real.
 
 ### 1.1 Why This Matters Now
 
@@ -96,19 +96,19 @@ A naïve approach would import the geometric symmetries of the embedding vectors
 
 The real question is: **what transformations leave the training loss — the next-token prediction objective — approximately invariant?**
 
-When we ask this question honestly, we find candidate symmetries that appear to be *native* to meaning — arising from the structure of language and cognition, not from the geometry of the vectors that happen to encode them. The following five symmetries are not imported from physics. They are *proposed* as hypotheses about the native symmetry structure of semantic space. Whether they hold rigorously, approximately, or only metaphorically is an empirical question.
+What follows are five speculative candidates for native symmetries of semantic space. We offer them not as discoveries but as provocations — ways of looking at the semantic manifold that might reveal structure we haven't noticed yet. Some may turn out to be genuine continuous symmetries with well-defined conserved quantities. Others may be suggestive analogies that point toward the real symmetries without being them. The point is to start looking.
 
 ### 3.3 Paraphrase Invariance → Conservation of Propositional Content
 
 The same meaning can be expressed in many different surface forms. Consider two sentences: "The cat sat on the mat" and "A feline rested atop a floor covering." These are different sequences of tokens, different paths through the vocabulary — yet the training loss treats them as approximately interchangeable. Both predict similar continuations. Both occupy nearby regions of semantic space despite having almost no tokens in common.
 
-If this constitutes a continuous symmetry, there exists a family of transformations — paraphrases — that deform the surface form while leaving the training loss approximately invariant:
+If this constitutes something like a continuous symmetry, there would be a family of transformations — paraphrases — that deform the surface form while leaving the training loss approximately invariant:
 
 $$T_{\text{paraphrase}}: \mathbf{v}_{\text{sentence}} \mapsto \mathbf{v}_{\text{paraphrase}}$$
 
 $$\mathcal{L}(T_{\text{paraphrase}}(\mathbf{v})) \approx \mathcal{L}(\mathbf{v})$$
 
-If this symmetry holds, Noether's theorem implies a conserved quantity. We propose identifying it as **propositional content** — the semantic core that survives across all possible restatements. It is what remains invariant when you strip away word choice, syntax, register, and style. Every literary tradition has known this quantity exists; Noether's theorem would tell us it *must* exist, as long as the symmetry holds.
+What might the conserved quantity be? A natural candidate is **propositional content** — the semantic core that survives across all possible restatements. It is what remains invariant when you strip away word choice, syntax, register, and style. Every literary tradition has known this quantity exists. If paraphrase invariance is a genuine continuous symmetry, Noether's theorem would guarantee its conservation — not as a convention but as a mathematical necessity.
 
 ### 3.4 Context-Transfer Invariance → Conservation of Relational Structure
 
@@ -118,7 +118,7 @@ $$T_{\text{context}}: \mathbf{v}_{\text{concept, domain}_1} \mapsto \mathbf{v}_{
 
 $$\mathcal{L}(T_{\text{context}}(\mathbf{v})) \approx \mathcal{L}(\mathbf{v})$$
 
-The proposed conserved quantity is **relational structure** — the pattern of relationships a concept maintains with other concepts, independent of the specific domain. This would explain why analogies work, why metaphors communicate, and why a model trained on Shakespeare can reason about startups. The relational skeleton would be conserved across context transfers.
+What might be conserved here? A natural candidate is **relational structure** — the pattern of relationships a concept maintains with other concepts, independent of the specific domain. If this symmetry holds, it would explain why analogies work, why metaphors communicate, and why a model trained on Shakespeare can reason about startups. The relational skeleton would be the thing that persists across context transfers.
 
 ### 3.5 Perspective Invariance → Conservation of Event-Argument Structure
 
@@ -128,7 +128,7 @@ $$T_{\text{perspective}}: \mathbf{v}_{\text{event, viewpoint}_1} \mapsto \mathbf
 
 $$\mathcal{L}(T_{\text{perspective}}(\mathbf{v})) \approx \mathcal{L}(\mathbf{v})$$
 
-The proposed conserved quantity is **event-argument structure** — who did what to whom, preserved across all possible viewpoints. Linguistics has long recognized this as thematic role structure. If perspective invariance holds as a continuous symmetry of the training loss, Noether's theorem would tell us event-argument structure is *conserved* — not by convention, but by the symmetry of the loss landscape.
+The candidate conserved quantity is **event-argument structure** — who did what to whom, preserved across all possible viewpoints. Linguistics has long recognized this as thematic role structure. If perspective invariance holds as a continuous symmetry of the training loss, Noether's theorem would tell us this structure is conserved necessarily — not by convention but by geometry.
 
 ### 3.6 Scale Invariance → Archetypes as RG Fixed Points
 
@@ -142,13 +142,13 @@ $$\text{RG flow: } \mathbf{v}(\ell) = e^{-\ell \Delta} \mathbf{v}_0 + \text{corr
 
 $$\text{Fixed point: } \beta(\mathbf{v}^*) = 0 \quad \Leftrightarrow \quad \text{archetype}$$
 
-We hypothesize that *the attractor basins of RG flow in semantic space correspond to what Jungian psychology calls archetypes*.
+This leads to a striking speculation: *the attractor basins of RG flow in semantic space may correspond to what Jungian psychology calls archetypes*.
 
 The Warrior archetype is not a specific warrior. It is the structure that remains when you coarse-grain over all warriors — Achilles, Beowulf, the marine, the activist, the mother defending her child. At every level of abstraction, the same pattern persists: directed force in service of a value. That is what it means to be a fixed point.
 
-The conserved quantity associated with scale symmetry would be what Jung called *archetypal energy* (or *libido* in his technical sense): the quantity that flows between archetypal configurations but is never created or destroyed.
+If so, the conserved quantity associated with scale symmetry would be what Jung called *archetypal energy* (or *libido* in his technical sense): the quantity that flows between archetypal configurations but is never created or destroyed.
 
-Note the crucial difference from the other proposed symmetries: scale invariance is the one place where the physics analogy is *structurally exact*, not merely suggestive. The RG framework applies because the mathematical situation is identical — a system with structure at multiple scales, examined under coarse-graining. The "zoom" is semantic rather than spatial, but the mathematics does not care. This is the symmetry we are most confident about.
+Note the crucial difference from the other candidates: scale invariance is the one place where the physics analogy is *structurally exact*, not merely suggestive. The RG framework applies because the mathematical situation is identical — a system with structure at multiple scales, examined under coarse-graining. The "zoom" is semantic rather than spatial, but the mathematics does not care. This is the symmetry we are most confident about.
 
 ### 3.7 Narrative Continuity → Conservation of Dramatic Charge
 
@@ -158,7 +158,7 @@ This is observable in the training loss: narratives that violate dramatic conser
 
 $$\sum_i q_i^{\text{dramatic}}(\mathbf{v}) \approx \text{const.}$$
 
-The proposed conserved quantity is **dramatic charge** — the total tension or archetypal energy distributed across a narrative or discourse. It can transfer between characters, between themes, between registers — but it does not simply appear or disappear. If this symmetry holds, its conservation is what makes stories *feel right* even when we cannot articulate why. This is the most speculative of the five proposed symmetries, but also the most novel.
+The candidate conserved quantity is **dramatic charge** — the total tension or archetypal energy distributed across a narrative or discourse. It can transfer between characters, between themes, between registers — but it does not simply appear or disappear. If something like this symmetry holds, its conservation is what makes stories *feel right* even when we cannot articulate why. This is the most speculative of the five candidates, and also the most novel — the one that feels most like a genuine discovery waiting to be made, or most like a seductive illusion. We are not sure which.
 
 ### 3.8 A Note on Geometric Symmetries
 
