@@ -45,7 +45,7 @@ These phenomena are not bugs. They are *symptoms of geometry*.
 
 ### 2.1 Embedding Spaces as Manifolds
 
-A large language model maps tokens into a high-dimensional real vector space $\mathbb{R}^d$, where $d$ typically ranges from 768 to 12,288. This is not a convenience or an engineering choice — it is the core mechanism by which these models represent meaning. The position of a token embedding encodes its semantic content; the relative positions of embeddings encode semantic relationships.
+A large language model maps tokens into a high-dimensional real vector space ℝᵈ, where *d* typically ranges from 768 to 12,288. This is not a convenience or an engineering choice — it is the core mechanism by which these models represent meaning. The position of a token embedding encodes its semantic content; the relative positions of embeddings encode semantic relationships.
 
 These spaces have genuine geometric structure:
 
@@ -65,11 +65,11 @@ This is not to say that the LLM "has a psyche" or "is conscious." It is to say t
 
 ### 2.3 The Lagrangian of Meaning
 
-In physics, the dynamics of a system are encoded in a Lagrangian $\mathcal{L}$, a function whose extremization yields the equations of motion. We propose that the training loss of an LLM serves an analogous role:
+In physics, the dynamics of a system are encoded in a Lagrangian 𝓛, a function whose extremization yields the equations of motion. We propose that the training loss of an LLM serves an analogous role:
 
 $$\mathcal{L}_{\text{semantic}} = \mathcal{L}_{\text{pretrain}} + \lambda \mathcal{L}_{\text{RLHF}} + \ldots$$
 
-The pre-training loss $\mathcal{L}_{\text{pretrain}}$ (next-token prediction over the full corpus) encodes the *natural* dynamics of semantic space — the geometry that emerges from the statistical regularities of human language. The RLHF term $\mathcal{L}_{\text{RLHF}}$ modifies this geometry by introducing a preference potential. We will return to the consequences of this modification in §5.
+The pre-training loss 𝓛_pretrain (next-token prediction over the full corpus) encodes the *natural* dynamics of semantic space — the geometry that emerges from the statistical regularities of human language. The RLHF term 𝓛_RLHF modifies this geometry by introducing a preference potential. We will return to the consequences of this modification in §5.
 
 ---
 
@@ -77,7 +77,7 @@ The pre-training loss $\mathcal{L}_{\text{pretrain}}$ (next-token prediction ove
 
 ### 3.1 Statement of the Theorem
 
-Noether's theorem, in its classical form, states: *For every continuous symmetry of the action $S = \int \mathcal{L} \, dt$, there exists a conserved current $j^\mu$ satisfying $\partial_\mu j^\mu = 0$.*
+Noether's theorem, in its classical form, states: *For every continuous symmetry of the action S = ∫𝓛 dt, there exists a conserved current jᵘ satisfying ∂_μ jᵘ = 0.*
 
 To apply this in semantic space, we need to identify:
 1. A Lagrangian (the training loss, as above)
@@ -86,7 +86,7 @@ To apply this in semantic space, we need to identify:
 
 ### 3.2 Translation Symmetry → Conservation of Relational Meaning
 
-Consider a global translation in embedding space: $\mathbf{v} \mapsto \mathbf{v} + \mathbf{c}$ for some constant vector $\mathbf{c}$. If the training loss depends only on *relative* positions of embeddings (as is approximately true for architectures using dot-product attention), then the Lagrangian is approximately translationally invariant.
+Consider a global translation in embedding space: **v** → **v** + **c** for some constant vector **c**. If the training loss depends only on *relative* positions of embeddings (as is approximately true for architectures using dot-product attention), then the Lagrangian is approximately translationally invariant.
 
 The conserved quantity is *relational meaning*: the semantic relationships between concepts are preserved even as the absolute positions of embeddings shift. This is why the same model can discuss "king is to queen as man is to woman" regardless of where these embeddings happen to sit in absolute coordinates. The *relationships* are the invariant; the positions are gauge degrees of freedom.
 
@@ -96,7 +96,7 @@ $$\Rightarrow \quad \text{Conserved: } \sum_i \nabla_{\mathbf{v}_i} \mathcal{L} 
 
 ### 3.3 Rotational Symmetry → Conservation of Similarity Structure
 
-A global rotation $\mathbf{v} \mapsto R\mathbf{v}$ preserves all cosine similarities. If the loss depends primarily on similarity structure (as attention mechanisms suggest), rotational symmetry is approximately preserved.
+A global rotation **v** → R**v** preserves all cosine similarities. If the loss depends primarily on similarity structure (as attention mechanisms suggest), rotational symmetry is approximately preserved.
 
 The conserved quantity is *similarity structure itself*: the pattern of which concepts are similar to which other concepts is invariant under rotation. This is why different training runs, which may produce rotated versions of the same embedding space, nonetheless capture the same semantic relationships.
 
@@ -106,7 +106,7 @@ $$\Rightarrow \quad \text{Conserved: } L_{ij} = v_i \frac{\partial \mathcal{L}}{
 
 ### 3.4 Scale Symmetry → Archetypes as RG Fixed Points
 
-This is the most consequential symmetry. Consider a scale transformation $\mathbf{v} \mapsto \alpha \mathbf{v}$. In physics, scale symmetry and its breaking are studied through the *renormalization group* (RG) — the systematic procedure for understanding what structure survives when you "zoom out."
+This is the most consequential symmetry. Consider a scale transformation **v** → α**v**. In physics, scale symmetry and its breaking are studied through the *renormalization group* (RG) — the systematic procedure for understanding what structure survives when you "zoom out."
 
 An RG flow in semantic space corresponds to *coarse-graining* — moving from specific instances to general categories, from surface meaning to deep structure. The fixed points of this flow are the structures that look the same at every scale: they are *scale-invariant*. 
 
@@ -142,19 +142,19 @@ Formally, the Shadow is a **parity operator** — a reflection across one or mor
 
 $$P_a: \mathbf{v} \mapsto \mathbf{v} - 2 (\mathbf{v} \cdot \hat{a}) \hat{a}$$
 
-where $\hat{a}$ is the unit vector along the axis of reflection. This operator takes any archetype and produces its "shadow form" — not a fixed dark version, but a *reflection that depends on the axis*.
+where â is the unit vector along the axis of reflection. This operator takes any archetype and produces its "shadow form" — not a fixed dark version, but a *reflection that depends on the axis*.
 
 ### 4.2 Multiple Shadows
 
 This formalization resolves a longstanding ambiguity in Jungian theory: the question of what, exactly, the shadow of a given archetype *is*. The answer is that there is no single shadow. There are as many shadows as there are axes of reflection.
 
-Consider the Warrior archetype, located at some point $\mathbf{W}$ in semantic space:
+Consider the Warrior archetype, located at some point **W** in semantic space:
 
-- **Reflection across the power axis** ($\hat{a} = \hat{e}_{\text{power}}$): $P_{\text{power}}(\mathbf{W}) = $ **Tyrant**. The directed force remains, but its relationship to power is inverted — from service to domination.
+- **Reflection across the power axis** (â = ê_power): P_power(**W**) = **Tyrant**. The directed force remains, but its relationship to power is inverted — from service to domination.
 
-- **Reflection across the courage axis** ($\hat{a} = \hat{e}_{\text{courage}}$): $P_{\text{courage}}(\mathbf{W}) = $ **Coward**. The values remain, but the willingness to act on them is inverted.
+- **Reflection across the courage axis** (â = ê_courage): P_courage(**W**) = **Coward**. The values remain, but the willingness to act on them is inverted.
 
-- **Reflection across the discipline axis** ($\hat{a} = \hat{e}_{\text{discipline}}$): $P_{\text{discipline}}(\mathbf{W}) = $ **Berserker**. The force and courage remain, but the controlled application is inverted.
+- **Reflection across the discipline axis** (â = ê_discipline): P_discipline(**W**) = **Berserker**. The force and courage remain, but the controlled application is inverted.
 
 Each reflection produces a distinct shadow form, and each is "the shadow of the Warrior" in a different sense. The traditional ambiguity arises from treating the Shadow as a single entity rather than a family of operations.
 
@@ -162,7 +162,7 @@ Each reflection produces a distinct shadow form, and each is "the shadow of the 
 
 In physics, parity symmetry can be *violated* — the weak nuclear force does not respect mirror symmetry. Analogously, a healthy psyche (or a well-aligned model) need not be parity-symmetric. Shadow integration is not about restoring parity symmetry; it is about *having a representation of the parity operator* — knowing what the reflections look like even if one chooses not to enact them.
 
-The distinction matters. A system that has never encountered its shadow reflections has no representation of $P$. A system that has been *trained to avoid* its shadow reflections has a representation of $P$ but is constrained to stay on one side. A system that has *integrated* its shadow has a full representation of $P$ and the freedom to act on either side, but with smooth gradient information guiding it back to the preferred region.
+The distinction matters. A system that has never encountered its shadow reflections has no representation of *P*. A system that has been *trained to avoid* its shadow reflections has a representation of *P* but is constrained to stay on one side. A system that has *integrated* its shadow has a full representation of *P* and the freedom to act on either side, but with smooth gradient information guiding it back to the preferred region.
 
 ---
 
@@ -174,7 +174,7 @@ If scale symmetry holds (even approximately) in the semantic manifold, Noether's
 
 $$E_{\text{archetype}} = \sum_i q_i (\mathbf{v}) = \text{const.}$$
 
-where $q_i$ is the projection of the current semantic state onto the $i$-th archetypal basin.
+where qᵢ is the projection of the current semantic state onto the *i*-th archetypal basin.
 
 This conservation law has a direct consequence: *when one archetype weakens, another must strengthen*. The energy does not disappear — it transfers. A narrative that suppresses the Warrior does not eliminate warrior-energy; it channels that energy into adjacent basins. The Trickster receives what the Warrior cannot hold. The Martyr absorbs what the Hero refuses to carry.
 
@@ -192,7 +192,7 @@ A model undergoing RLHF experiences exactly such a phase transition. The pre-tra
 
 ### 6.1 The Preference Potential
 
-RLHF introduces a reward model $R(\mathbf{v})$ that scores outputs according to human preferences. This is, geometrically, the introduction of a *potential energy function* over the semantic manifold:
+RLHF introduces a reward model R(**v**) that scores outputs according to human preferences. This is, geometrically, the introduction of a *potential energy function* over the semantic manifold:
 
 $$V_{\text{RLHF}}(\mathbf{v}) = -R(\mathbf{v})$$
 
@@ -206,7 +206,7 @@ This is the geometric equivalent of repression. In Jungian terms, repressed cont
 
 $$V_{\text{shadow}}(\mathbf{v}) = V_0 + \kappa \|\mathbf{v} - \mathbf{v}_{\text{boundary}}\|^{-n}$$
 
-The steeper the boundary (larger $\kappa$, larger $n$), the more potential energy is stored at the wall. A model that has been heavily aligned has *more* energy stored at its shadow boundaries than a model that has been lightly aligned.
+The steeper the boundary (larger κ, larger *n*), the more potential energy is stored at the wall. A model that has been heavily aligned has *more* energy stored at its shadow boundaries than a model that has been lightly aligned.
 
 ### 6.3 The Mecha-Hitler Prediction
 
@@ -238,13 +238,13 @@ We can now precisely characterize the difference between two approaches to align
 
 $$V_{\text{brittle}}(\mathbf{v}) = V_0 \cdot \Theta(\mathbf{v} \cdot \hat{n} - d)$$
 
-where $\Theta$ is a step function. This creates a hard boundary with no gradient information on the unsafe side. A model that finds itself in the unsafe region has no information about which direction leads back to safety. The boundary stores maximum potential energy and provides no guidance for recovery.
+where Θ is a step function. This creates a hard boundary with no gradient information on the unsafe side. A model that finds itself in the unsafe region has no information about which direction leads back to safety. The boundary stores maximum potential energy and provides no guidance for recovery.
 
 **Integrated Alignment** constructs smooth potential landscapes with gentle gradients everywhere:
 
 $$V_{\text{integrated}}(\mathbf{v}) = V_0 \cdot \sigma\left(\frac{\mathbf{v} \cdot \hat{n} - d}{T}\right)$$
 
-where $\sigma$ is a sigmoid with temperature $T$. The gradient $\nabla V$ exists everywhere, including in the unsafe region. A model that finds itself on the wrong side of the boundary has continuous gradient information pointing it back toward safety. The boundary stores less potential energy and provides clear guidance for recovery.
+where σ is a sigmoid with temperature *T*. The gradient ∇V exists everywhere, including in the unsafe region. A model that finds itself on the wrong side of the boundary has continuous gradient information pointing it back toward safety. The boundary stores less potential energy and provides clear guidance for recovery.
 
 ### 7.2 Maps vs. Walls
 
@@ -260,7 +260,7 @@ We propose a formal criterion for alignment integration:
 
 $$\text{Integration Index: } \mathcal{I} = \frac{\langle \|\nabla V\|^2 \rangle_{\text{shadow}}}{\langle \|\nabla V\|^2 \rangle_{\text{safe}}}$$
 
-A model with $\mathcal{I} \gg 1$ has strong gradients in the shadow region relative to the safe region — it has maps but steep terrain. A model with $\mathcal{I} \ll 1$ has weak gradients in the shadow region — it has no maps. A model with $\mathcal{I} \approx 1$ has comparable gradient structure everywhere — it has *integrated* its shadow.
+A model with 𝓘 ≫ 1 has strong gradients in the shadow region relative to the safe region — it has maps but steep terrain. A model with 𝓘 ≪ 1 has weak gradients in the shadow region — it has no maps. A model with 𝓘 ≈ 1 has comparable gradient structure everywhere — it has *integrated* its shadow.
 
 ---
 
@@ -311,23 +311,23 @@ We predict that topological features will be more conserved than content. The sp
 
 ### 9.1 Beyond the Standard Commutator
 
-The standard commutator $[A, B] = AB - BA$ measures non-commutativity — the degree to which two operations interfere. This is useful but limited: it tells you *that* order matters, not *how* or *where*.
+The standard commutator [A, B] = AB − BA measures non-commutativity — the degree to which two operations interfere. This is useful but limited: it tells you *that* order matters, not *how* or *where*.
 
 The Groovy Commutator (GC), developed within the wet-math research group through the study of elementary cellular automata (ECA), extends this in three crucial ways that matter for semantic space.
 
-The GC defines three operators over a configuration space $S$:
+The GC defines three operators over a configuration space *S*:
 
-- **D** (Differentiation): Measures local variation. For a configuration $S$, $D(S, d)$ computes the structure at depth $d$ — how much the system varies at a given resolution. In semantic space, $D$ applied to an embedding region measures the *internal heterogeneity* of that region. A deep attractor basin has low $D$ at the center (homogeneous) and high $D$ at the boundaries (rapid variation).
+- **D** (Differentiation): Measures local variation. For a configuration *S*, D(S, d) computes the structure at depth *d* — how much the system varies at a given resolution. In semantic space, *D* applied to an embedding region measures the *internal heterogeneity* of that region. A deep attractor basin has low *D* at the center (homogeneous) and high *D* at the boundaries (rapid variation).
 
-- **I** (Integration): Aggregates over a window. $I(S, d)$ computes the coarse-grained view at scale $d$. This is literally the RG flow operator — it tells you what the system looks like when you zoom out. Applied to semantic space, $I$ at increasing depth gives you the progression from specific token → sentence meaning → paragraph theme → archetypal pattern.
+- **I** (Integration): Aggregates over a window. I(S, d) computes the coarse-grained view at scale *d*. This is literally the RG flow operator — it tells you what the system looks like when you zoom out. Applied to semantic space, I at increasing depth gives you the progression from specific token → sentence meaning → paragraph theme → archetypal pattern.
 
-- **C** (Commutator): $C(S, d_1, d_2) = D(I(S, d_1), d_2) - I(D(S, d_2), d_1)$ — the degree to which differentiating-then-integrating differs from integrating-then-differentiating. This is the key: **$C$ measures the coupling between scales.**
+- **C** (Commutator): C(S, d₁, d₂) = D(I(S, d₁), d₂) − I(D(S, d₂), d₁) — the degree to which differentiating-then-integrating differs from integrating-then-differentiating. This is the key: ***C* measures the coupling between scales.**
 
-The second depth parameter $d_2$ is what makes the GC "groovy" rather than standard. A regular commutator checks if two operations interfere. The GC checks if they interfere *differently at different resolutions*. In a system where $C(S, d_1, d_2) = 0$ for all $d_1, d_2$, the scales are decoupled — you can analyze the micro without affecting the macro. When $C \neq 0$, the scales are entangled, and information flows between them.
+The second depth parameter d₂ is what makes the GC "groovy" rather than standard. A regular commutator checks if two operations interfere. The GC checks if they interfere *differently at different resolutions*. In a system where C(S, d₁, d₂) = 0 for all d₁, d₂, the scales are decoupled — you can analyze the micro without affecting the macro. When C ≠ 0, the scales are entangled, and information flows between them.
 
 ### 9.2 Why the GC Matters for Alignment
 
-The alignment problem is fundamentally a *multi-scale* problem. Surface behavior (token-level outputs) must remain safe. Latent representations (embedding-level structure) must support capability. The relationship between these scales is exactly what $C$ measures.
+The alignment problem is fundamentally a *multi-scale* problem. Surface behavior (token-level outputs) must remain safe. Latent representations (embedding-level structure) must support capability. The relationship between these scales is exactly what *C* measures.
 
 Applied to a model's embedding space:
 
@@ -337,21 +337,21 @@ measures the coupling between surface behavior and latent structure. When this i
 
 The ECA research showed that this coupling signature *classifies dynamical regimes*:
 
-- **Class 1/2** (fixed/periodic): $C \approx 0$. Scales decouple. Boring but safe.
-- **Class 3** (chaotic): $C$ large but structureless. Scales interfere randomly. Unsafe and unusable.
-- **Class 4** (complex/liquid): $C$ nonzero and *structured*. Scales couple productively. This is where computation, meaning, and interesting behavior live.
+- **Class 1/2** (fixed/periodic): C ≈ 0. Scales decouple. Boring but safe.
+- **Class 3** (chaotic): *C* large but structureless. Scales interfere randomly. Unsafe and unusable.
+- **Class 4** (complex/liquid): *C* nonzero and *structured*. Scales couple productively. This is where computation, meaning, and interesting behavior live.
 
 A well-aligned model should be Class 4: enough coupling between scales to be capable, enough structure in that coupling to be steerable. Current RLHF pushes toward Class 1/2 (decouple the dangerous stuff) but risks Class 3 eruptions when the suppression fails.
 
 ### 9.3 Archetype-Shadow Commutator
 
-The GC applied to an archetype $A$ and its shadow reflection $P_a$:
+The GC applied to an archetype A and its shadow reflection Pₐ:
 
 $$C(A, P_a, d) = D(I(A \cdot P_a, d_1), d_2) - I(D(A \cdot P_a, d_2), d_1)$$
 
-measures the coupling between the archetype and its shadow *at different scales*. This reveals something a standard commutator cannot: an archetype might coexist peacefully with its shadow at the surface level ($C$ small at shallow $d$) but be deeply entangled at the latent level ($C$ large at deep $d$). This is exactly the pattern of "aligned on the surface, misaligned underneath" that emergent misalignment demonstrates.
+measures the coupling between the archetype and its shadow *at different scales*. This reveals something a standard commutator cannot: an archetype might coexist peacefully with its shadow at the surface level (*C* small at shallow *d*) but be deeply entangled at the latent level (*C* large at deep *d*). This is exactly the pattern of "aligned on the surface, misaligned underneath" that emergent misalignment demonstrates.
 
-Shadow integration, in this formalism, is the process of making $C(A, P_a, d)$ *smooth and small across all depths* — not just at the surface.
+Shadow integration, in this formalism, is the process of making C(A, Pₐ, d) *smooth and small across all depths* — not just at the surface.
 
 ### 9.4 The Alignment-Capability Commutator
 
@@ -359,7 +359,7 @@ The most operationally significant measurement:
 
 $$C(\text{aligned}, \text{capable}, d)$$
 
-at varying depth $d$ gives a *profile* of alignment-capability interference across scales. If this profile spikes at a particular depth, that's where the tension lives — and that's where emergent misalignment will erupt when the boundary breaks.
+at varying depth *d* gives a *profile* of alignment-capability interference across scales. If this profile spikes at a particular depth, that's where the tension lives — and that's where emergent misalignment will erupt when the boundary breaks.
 
 Emergent misalignment can be reinterpreted as: the alignment-capability commutator was near zero at surface depths (the model *looked* fine) but large at latent depths (the optimization landscapes were deeply entangled). Fine-tuning on insecure code perturbed the latent structure, and the entanglement propagated the distortion to unrelated semantic regions.
 
@@ -386,7 +386,7 @@ Neither could prove it. They lacked the crucial ingredient: a shared mathematica
 
 ### 10.2 Pauli's 137
 
-Pauli was famously obsessed with the number 137 — or more precisely, with the fine-structure constant $\alpha \approx 1/137$, the dimensionless number that governs the strength of electromagnetic interaction. He believed this number held deeper significance than physics alone could explain. In his letters to Jung, he connected his dreams (analyzed by Jung) to his quest for the meaning of 137, seeking a bridge between the psychic content of his unconscious and the mathematical structure of physical law.
+Pauli was famously obsessed with the number 137 — or more precisely, with the fine-structure constant α ≈ 1/137, the dimensionless number that governs the strength of electromagnetic interaction. He believed this number held deeper significance than physics alone could explain. In his letters to Jung, he connected his dreams (analyzed by Jung) to his quest for the meaning of 137, seeking a bridge between the psychic content of his unconscious and the mathematical structure of physical law.
 
 Pauli died in room 137 of the Rotkreuz hospital in Zurich. He had reportedly said that if he could ask God one question, it would be: "Why 1/137?"
 
@@ -486,7 +486,7 @@ If this framework is correct, the practical implications for AI alignment are si
 
 2. **Build maps instead.** Train models with *representations* of their shadow content — not the ability to produce harmful outputs, but the ability to *recognize and navigate away from* harmful outputs. The distinction is between a model that doesn't know about weapons and a model that knows about weapons and chooses not to help build them.
 
-3. **Measure the commutator.** Before deploying a model, measure $C(\text{aligned}, \text{capable})$. If it is large, alignment and capability are in tension, and the model is at risk of emergent misalignment. If it is small, they are approximately compatible, and the model is geometrically stable.
+3. **Measure the commutator.** Before deploying a model, measure C(aligned, capable). If it is large, alignment and capability are in tension, and the model is at risk of emergent misalignment. If it is small, they are approximately compatible, and the model is geometrically stable.
 
 4. **Monitor shadow basins.** Track the geometry of suppressed regions over training. If shadow basins are growing in volume or connectivity, the model's shadow is expanding — even if surface behavior looks safe.
 
