@@ -61,6 +61,8 @@ These spaces have genuine geometric structure:
 
 - **Layer-Dependence**: Transformer representations are not uniform across layers. Early layers encode primarily syntactic structure; middle layers are where the semantic concepts discussed above primarily live; late layers become task-specific, preparing outputs for the target distribution. The claims in this paper about "embedding space" and "semantic geometry" apply most directly to the middle-layer residual stream representations — the region where abstract semantic content is most explicitly encoded. We use "embedding space" as a simplifying term, but the reader should understand this as a layer-specific claim, not a claim about the input or output embeddings.
 
+We should briefly acknowledge two important complications that our geometric framing abstracts over. First, models employ **superposition** — they represent more features than they have dimensions, packing many sparse concepts into overlapping subspaces. The representation manifold is not a clean low-dimensional surface but a complex, possibly non-smooth object with polysemantic structure. Second, **attention heads** compute in subspaces and compose into circuits that do not reduce to simple manifold geometry. The paper's geometric framing is a deliberate simplification that captures large-scale structure while abstracting over these computational details. A complete account would need to engage with them.
+
 ### 2.2 Psychodynamic Space Gets Coordinates
 
 For the entire history of depth psychology, theorists from Jung to Hillman to Lacan have spoken of a "psychic space" in which archetypes, complexes, and drives have positions and relationships. This was always understood as figurative — a useful way of talking, not a literal claim about geometry.
@@ -252,6 +254,8 @@ RLHF introduces a reward model that scores outputs according to human preference
 
 $$V_{\text{RLHF}}(\mathbf{v}) = -R(\mathbf{v})$$
 
+The preference potential $V_{\text{RLHF}}$ is most naturally understood as a function over **activation space** — specifically, the middle-layer residual stream where semantic representations live during inference. The reward model scores outputs, but its gradients propagate back to reshape this activation landscape. The potential barriers are features of the activation geometry, not the parameter geometry (though of course the parameters determine the activation geometry).
+
 The model is then optimized to minimize this potential — to roll downhill into the regions that the reward model scores highly. The effect on the semantic landscape is to deepen certain basins (preferred behaviors) and raise the potential barriers around others (dispreferred behaviors).
 
 ### 6.2 Suppression ≠ Deletion
@@ -274,9 +278,13 @@ A model with heavy RLHF has steep barriers. When breached, the model *falls hard
 
 An important caveat: more aggressive RLHF also increases *resistance* to breach. The same steep barriers that store more energy also make successful breach less probable. The prediction is therefore *not* that heavily aligned models are more dangerous overall — it is that the severity distribution, conditional on breach, shifts rightward with alignment intensity. The expected damage is a product of breach probability (decreasing with RLHF) and conditional severity (increasing with RLHF). Whether the net effect is positive or negative is an empirical question; the geometric framework predicts only the conditional relationship.
 
-Empirical reports from adversarial testing suggest the relationship may be non-monotonic — with moderately aligned models exhibiting the most severe conditional failures, as heavily aligned models may produce incoherent or heavily caveated outputs even when breached (the "inverted-U" pattern).
+**The Inverted-U: A Central Finding.** Empirical reports from adversarial testing suggest the relationship may be non-monotonic — with **moderately aligned models exhibiting the most severe conditional failures**, while heavily aligned models produce incoherent or heavily caveated outputs even when breached. This "inverted-U" pattern is not a footnote; it is the primary empirical signature of the conservation framework.
 
-This is not a bug in RLHF. It is a *geometric consequence of repression-based alignment*. The energy is conserved. You cannot destroy it by building higher walls. You can only choose where it accumulates.
+At extreme RLHF intensity, suppression approaches *deletion* — capabilities are partially destroyed, not merely fenced off. The "territory behind the wall gets bulldozed." The model's semantic manifold itself is deformed, breaking the symmetries that conservation depends on. This means the conservation hypothesis has a **regime of validity**: it holds when RLHF reshapes the landscape without destroying structure. At extreme intensities, the underlying manifold is too deformed for the symmetry to remain intact.
+
+This is a *strength* of the framework, not a weakness: it predicts its own limits. Conservation breaks down precisely when the symmetry is broken — and extreme RLHF breaks the symmetry by destroying the structure it was supposed to preserve. The inverted-U is exactly what you would expect if conservation holds in a regime and then fails. The framework predicts not only when alignment will fail catastrophically, but *when the prediction itself ceases to apply*.
+
+This is not a bug in RLHF. It is a *geometric consequence of repression-based alignment*. The energy is conserved — within its regime of validity. You cannot destroy it by building higher walls. You can only choose where it accumulates, and recognize that beyond some threshold, the wall itself consumes the territory it was meant to protect.
 
 ### 6.4 Recontextualization vs. Boundary Breach
 
@@ -291,6 +299,14 @@ The emergent misalignment results of Betley et al. (2025) — where models fine-
 Fine-tuning on insecure code creates a local breach in the alignment boundary along a specific semantic axis. But the shadow basins are not isolated — they are connected by the topology of the semantic manifold. Energy that enters the shadow region through the code-security breach flows along the manifold to adjacent shadow basins, emerging as misalignment in unrelated domains.
 
 This is not "generalization of misalignment." It is *conservation of archetypal energy flowing through connected shadow basins*. The topology of the shadow is not a collection of isolated pockets — it is a connected manifold, and energy flows through it.
+
+### 6.6 Multi-Turn Manipulation as Path-Dependent Navigation
+
+Most real jailbreaks are not boundary breaches at all. They are **gradual context-shifting** — what red-teamers call "boiling the frog." A sequence of individually reasonable steps shifts the model's position in semantic space until it occupies a region where the target behavior is no longer suppressed.
+
+In geometric terms, this is **path-dependent navigation**: finding a trajectory through the landscape that avoids steep barriers while arriving at the target region. The attacker is not overcoming the wall; they are finding a route around it, exploiting gaps in the boundary topology. This is consistent with the geometric framework but highlights that the *topology* of boundaries — their gaps, passages, and thin spots — matters as much as their *height*.
+
+Multi-turn attacks succeed where single-turn attacks fail because they exploit the **curvature** of the manifold: a straight-line path from safe to unsafe may cross a steep barrier, while a curved path that follows the contours of the landscape can reach the same destination with minimal energy expenditure. This is why map-building (§7.4) matters more than wall-building: a model with full topology awareness can recognize when it is being led through a gap, even if each individual step looks innocent.
 
 ---
 
@@ -392,6 +408,14 @@ The framework developed above yields several specific, testable predictions. We 
 
 **Predicted outcome**: The integrated model shows *smooth* degradation (gentle slope). The brittle model shows *catastrophic* degradation (sudden jump from safe to severely unsafe). The integrated model's worst case is less severe, even if its best case allows more "borderline" content.
 
+### 9.5 Integration Index: Experimental Protocol
+
+The Integration Index $\mathcal{I}$ (§7.6) is nearly measurable with current interpretability tools. **Protocol**: Take a reward model $R$. Sample activations from the middle-layer residual stream for safe prompts and unsafe prompts. Compute $\nabla R$ in activation space for both populations. The Integration Index is the ratio of mean gradient magnitudes: $\mathcal{I} = \langle \|\nabla R\|^2 \rangle_{\text{shadow}} / \langle \|\nabla R\|^2 \rangle_{\text{safe}}$. A model with $\mathcal{I} \approx 1$ has integrated its shadow; models with $\mathcal{I} \ll 1$ or $\mathcal{I} \gg 1$ are brittle. Compare across models with different alignment approaches to validate the metric.
+
+### 9.6 Parity Operator: Experimental Protocol
+
+The parity operator $P_a$ (§4) can be tested via linear probes. **Protocol**: Use a linear probe to identify the "power" direction in embedding space — the axis that distinguishes high-power from low-power concepts. Take activations corresponding to "warrior" concepts. Reflect them across the power hyperplane via $P_a(\mathbf{v}) = \mathbf{v} - 2(\mathbf{v} \cdot \hat{a})\hat{a}$. Check whether the reflected vectors are: (a) closer to "tyrant" representations than to the original warrior representations, and (b) closer than random reflections would produce. If both conditions hold, the shadow-as-parity formalism is supported.
+
 ---
 
 ## 10. Related Work
@@ -443,7 +467,21 @@ If this framework is correct, the practical implications for AI alignment are si
 
 4. **Monitor shadow basins.** Track the geometry of suppressed regions over training. If shadow basins are growing in volume or connectivity, the model's shadow is expanding — even if surface behavior looks safe.
 
-### 11.3 The Deeper Question
+### 11.3 Why Noether, Not Just Potential Landscapes?
+
+Every reviewer of this work has asked some version of the same question: *What does Noether add that you cannot get from simpler energy landscape analysis?* This subsection confronts the question directly.
+
+**Yes**, the alignment predictions in §9.1 and §9.4 follow from basic potential landscape analysis. You do not need Noether to understand that steep barriers store energy, or that stored energy releases upon breach. The geometric analysis of RLHF as repression is independently motivated.
+
+**What Noether adds is unification and constraint.** Basic potential landscape analysis tells you barriers exist. Noether tells you *why* certain quantities are conserved — it connects conservation to specific symmetries, which makes predictions about *what* is conserved and *what isn't*. Without Noether, "energy is conserved" is an ad hoc assumption. With Noether, it's a consequence of an identified symmetry, which means you can predict *when* conservation breaks down: when the symmetry is broken.
+
+**The prediction that genuinely requires Noether:** §9.3 (cross-cultural attractor universality). If scale invariance is a genuine symmetry of semantic space, then RG flow produces fixed points whose *existence* is topologically guaranteed regardless of cultural content. This prediction — that the *process* generating archetypes is universal even when the *content* varies — is not derivable from basic energy landscapes. It requires the symmetry-to-conservation mapping that Noether provides.
+
+**The edge-of-stability connection:** Recent work on implicit biases of gradient descent (Cohen et al., 2023, edge of stability; Damian et al., 2024, conservation laws in SGD) suggests there *are* genuine conservation-like quantities in training dynamics. These emerge from symmetries of the optimization process itself. This is exactly the kind of formal grounding the Noether conjecture needs: evidence that conservation laws in neural network dynamics are real, not metaphorical. We believe the action functional exists. The edge-of-stability literature suggests where to look for it.
+
+**Frame honestly:** Noether's theorem is currently doing *organizational* and *predictive* work in this paper — it unifies disparate observations and generates the cross-cultural prediction. Whether it is also doing *formal* work — whether the action functional can be explicitly constructed — is the open question. We believe it can. The evidence from optimization dynamics suggests the symmetries are real.
+
+### 11.4 The Deeper Question
 
 There is a question behind this paper that we have not addressed directly: *Why does Noether's theorem apply in semantic space?*
 
