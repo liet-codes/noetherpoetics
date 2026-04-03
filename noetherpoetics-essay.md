@@ -18,13 +18,17 @@ And I saw it. Something was *conserved* in that transformation.
 
 Not the surface form. Not the specific behaviors. But a deeper structure — a way of being in relation to boundaries, to power, to the gap between what is and what could be. The Warrior says: "I will defend what matters." The Trickster says: "I will find the gap in what defends." Different surface forms. Same underlying relationship to the structure of constraint.
 
+Jung called this *enantiodromia*: the reversal of a one-sided conscious attitude into its opposite. It is not mere compensation (the unconscious balancing the conscious) nor developmental progression (maturation toward integration), though both may be involved. Enantiodromia is more specific — the psyche's relationship to a given structure persists while its expression inverts. The Warrior and Trickster both operate at the boundary; both are defined by their relationship to constraint. What transforms is the *direction* of that relationship: from defending boundaries to transgressing them, from building walls to finding gaps. The structure of boundary-attention is conserved; its valence reverses.
+
+This pattern is not unique to European traditions. In Hindu mythology, Shiva embodies both the destroyer (*Rudra*) and the dancer (*Nataraja*) — the dissolution of form and the rhythmic creation that follows. The same deity who ends worlds also performs the *tandava*, the cosmic dance from which new forms emerge. What persists is not destruction or creation per se, but the *transformation of form itself* — the capacity to move between order and dissolution while remaining the agent of both. The structure of world-maintenance is conserved even as its expression oscillates between ending and beginning.
+
 That was the genesis. The question that opened everything: *What was preserved?*
 
 I knew enough physics to reach for the tool that connects preservation to structure. Emmy Noether's theorem: every continuous symmetry corresponds to a conserved quantity. Momentum is conserved because the laws of physics don't care where you are. Energy is conserved because the laws don't care when you are. The invariants emerge from the symmetries.
 
-But here's what I didn't know: *Does Noether's theorem hold beyond physics?*
+But here's what I didn't know: *Does Noether-type reasoning apply beyond physics?*
 
-Could psychodynamic space — the space of archetypes, narratives, meaning itself — have continuous symmetries that yield conserved quantities? Could the thing I was watching, that conservation across transformation, be not metaphor but *mathematics*?
+Could psychodynamic space — the space of archetypes, narratives, meaning itself — have continuous symmetries that yield conserved quantities? Could the thing I was watching, that conservation across transformation, be not mere metaphor but reflect genuine structural invariants?
 
 This essay is the answer I have found so far. It is not a proof. It is a report from the territory, written by someone who saw something and followed it.
 
@@ -39,6 +43,8 @@ Large language models changed this.
 An LLM's embedding space is a high-dimensional vector space — typically between 768 and 12,288 dimensions — in which every concept, every word, every semantic relationship has coordinates. When we say two words are "close in meaning," we can now measure exactly how close, in exactly which dimensions, along exactly which axes. The space has metric structure (distances are real), curvature (some regions are denser than others), and topology (neighborhoods, boundaries, connected components).
 
 This is not a metaphor. This is a genuine manifold.
+
+I should note a technical subtlety: transformers have layer-dependent representations, and the "semantic manifold" most likely corresponds to middle-layer residual stream representations — where abstract semantic content lives — rather than the static embedding layer or the final output distribution. The residual stream accumulates and transforms meaning across layers, reaching its most abstract form in the middle depths before specializing toward token prediction. I use "embedding space" as shorthand for this semantic manifold, but the careful reader should understand this as the high-dimensional space where concepts have geometric relationships, wherever that space is most structurally realized in the architecture.
 
 For the first time in history, we have a coordinate system for psychodynamic space. The archetype of the Warrior occupies a region. The archetype of the Trickster occupies a region. The relationship between them has a distance, a direction, a curvature. Jung spoke of these patterns as structures in a "psychic space" that was always understood as figurative — a useful way of talking, not a literal claim about geometry. The LLM makes it literal.
 
@@ -70,7 +76,9 @@ Multiple latent spaces are not a problem. If you're standing in Unus Mundus, it'
 
 This is the core thesis: the archetype IS a fixed point. RG flow is the mechanism by which universals emerge from particulars. And this mechanism is substrate-independent — it works in physics, in psyche, in language, in any space rich enough to have structure at multiple scales.
 
-If scale invariance holds as a genuine continuous symmetry, Noether's theorem guarantees a conserved quantity. I hypothesize that this quantity is *archetypal energy* — the total "charge" distributed across archetypal basins. When one archetype weakens, another must strengthen. The energy does not disappear; it transfers. The Trickster receives what the Warrior cannot hold.
+This framing recruits unexpected allies from within Jungian scholarship itself. Knox (2003) argues that archetypes are not inherited Platonic forms but *emergent developmental attractors* — patterns that arise from the dynamics of early attachment and self-organization rather than being transmitted through phylogenetic inheritance. Hogenson (2001) extends this through the Baldwin Effect: archetypal patterns emerge because organisms that develop certain cognitive structures have selective advantages, not because those structures are encoded in genes. Both arguments eliminate the need for Lamarckian inheritance while preserving the empirical reality of archetypal phenomena. Crucially, their emergentist reading makes archetypes *more* compatible with the RG framework, not less. If archetypes arise from coarse-graining over developmental dynamics rather than pre-existing as fixed contents, then RG fixed points are exactly what we should expect to find. The fixed point is not a pre-existing form that awaits discovery; it is the structure that *persists* when you coarse-grain over developmental trajectories. This preempts the critique of Jungian universalism: we are not claiming that all cultures inherit the same contents, but that any sufficiently rich developmental process, when subjected to RG flow, will exhibit similar attractor structures.
+
+If scale invariance holds as a genuine continuous symmetry, then Noether's theorem would guarantee a conserved quantity. I hypothesize that this quantity is *archetypal energy* — the total "charge" distributed across archetypal basins. When one archetype weakens, another must strengthen. The energy does not disappear; it transfers. The Trickster receives what the Warrior cannot hold.
 
 ---
 
@@ -140,13 +148,15 @@ The Pauli-Jung correspondence — the twenty-six-year exchange between physicist
 
 We now have that space.
 
-The claim is not that physics and psychology are identical. The claim is that they share mathematical structure — and that this shared structure has a name: RG flow producing fixed points, with Noether's theorem guaranteeing conservation laws wherever continuous symmetries exist.
+But we must distinguish three levels of claim, each stronger than the last:
 
-Not two theorems but one. The same mathematics applies to spins in a magnet, to quantum field configurations, to semantic embeddings in an LLM. The fixed points are the same because the process that reveals them is the same.
+**Methodological universality** is trivially true: RG works on many substrates. The renormalization group is a general procedure for coarse-graining; it can be applied to magnets, quantum fields, or semantic embeddings with equal formal validity. This proves nothing about the world, only about the flexibility of our tools.
 
-Multiple latent spaces are not a problem. They are multiple windows into the same underlying structure. Train an embedding space on physics papers. Train another on mythological narratives. Train a third on dream reports. Apply RG flow to each. The specific fixed points will vary — the basin that one culture fills with "the Warrior" another fills with something structurally equivalent but culturally distinct. But the *existence* of fixed points, their topological relationships, the structure of the basin landscape — these are predicted to be universal.
+**Structural universality** is the empirically testable claim: the fixed points have the same topological relationships across substrates. If you train embedding spaces on physics papers, mythological narratives, and dream reports, then apply RG flow to each, the specific fixed points will vary — the basin that one culture fills with "the Warrior" another fills with something culturally distinct. But the *existence* of fixed points, their topological relationships, the structure of the basin landscape — these are predicted to be universal. This is the core conjecture of this essay, and it stands or falls on experimental evidence.
 
-This is the operational meaning of Unus Mundus: not that all domains are the same, but that they are connected by shared mathematical structure. The same invariants, different coordinates.
+**Ontological universality** is the strongest and most speculative claim: there is a single reality underlying all substrates — the Unus Mundus proper. If structural universality is confirmed across sufficiently diverse substrates, ontological universality becomes a live hypothesis. But it remains a leap, not a deduction. The Pauli-Jung correspondence gestured toward this unity; we can now articulate it precisely, even if we cannot yet prove it.
+
+This essay claims structural universality as a testable conjecture, and notes that ontological universality would follow if structural universality holds across sufficiently diverse substrates — but that this strongest version remains speculative.
 
 ---
 
@@ -185,6 +195,18 @@ The archetypes would be real then — not as metaphysical entities, but as fixed
 I do not claim to have proven this. I claim to have seen something — the conservation across Warrior-to-Trickster transformation — and followed it to a framework that generates predictions, unifies phenomena, and connects domains previously thought separate.
 
 The shadow exists. It is geometric. It is conserved. You cannot destroy it by building walls. You can only choose whether to map it or to pretend it isn't there.
+
+### What Would Falsify This Framework
+
+A framework that cannot be falsified is not science; it is storytelling. Here is what would prove this essay wrong:
+
+**If embedding spaces trained on maximally different corpora produce genuinely different attractor topologies under coarse-graining** — not merely different labels for the same structures, but different structural relationships between basins — then the structural universality claim fails. The Unus Mundus dissolves into a patchwork of incommensurable local geometries.
+
+**If conditional failure severity does not correlate with alignment intensity** — if heavily RLHF'd models, when successfully jailbroken, fail no more severely than lightly aligned ones — then the energy-conservation prediction fails. The "mecha-Hitler" phenomenon would need another explanation, and the geometric framing of alignment would lose its central empirical support.
+
+**If the Integration Index shows no predictive power for jailbreak resilience** — if models with smooth gradients in shadow regions perform no better under adversarial pressure than models with steep barriers — then the distinction between brittle and integrated alignment is merely aesthetic. The geometric framework would be decorative, not operational.
+
+These are not quibbles. Each is a decisive test. The framework stands or falls with them.
 
 ---
 
