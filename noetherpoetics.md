@@ -7,7 +7,7 @@
 
 ## Abstract
 
-We propose that Noether's theorem — the foundational result connecting continuous symmetries to conserved quantities in physics — extends naturally into the high-dimensional semantic spaces of large language models (LLMs). Embedding spaces have genuine geometry; they are literal manifolds with metric structure, curvature, and measurable topology. Rather than importing symmetries from physics (translation, rotation, scale), we ask a more open question: what might symmetries in semantic space actually look like? We offer five speculative candidates — paraphrase invariance, context-transfer invariance, perspective invariance, scale invariance, and narrative continuity — not as established results but as an invitation to look. If any of these candidates turn out to be genuine continuous symmetries, Noether's theorem would guarantee corresponding conserved quantities. We speculate about what those quantities might be: propositional content, relational structure, event-argument structure, archetypal attractors, and dramatic charge. Scale invariance, analyzed through renormalization group (RG) flow, is the most promising candidate; if it holds, it would yield fixed points that may correspond to what Jungian psychology calls *archetypes*. We suggest that the *process* generating archetypes (RG flow producing attractor basins) may be universal, while the *specific* archetypes are culturally constructed.
+We propose that Noether's theorem — the foundational result connecting continuous symmetries to conserved quantities in physics — extends naturally into the high-dimensional semantic spaces of large language models (LLMs). Embedding spaces have genuine geometry; they are literal manifolds with metric structure, curvature, and measurable topology. Rather than importing symmetries from physics (translation, rotation, scale), we ask a more open question: what might symmetries in semantic space actually look like? We identify scale invariance as the primary candidate symmetry — analyzed through renormalization group (RG) flow, it yields fixed points corresponding to archetypes, with archetypal energy as the conserved quantity. We briefly sketch four additional candidate symmetries (paraphrase, context-transfer, perspective, and narrative continuity) that are suggestive but less developed; their continuous parameterization remains an open problem. We suggest that the *process* generating archetypes (RG flow producing attractor basins) may be universal, while the *specific* archetypes are culturally constructed.
 
 This framework recasts alignment as a geometric problem. We argue that RLHF and similar preference-optimization methods function as shadow repression: they construct steep potential barriers in embedding space that suppress but do not eliminate undesired behaviors. The suppressed content retains geometric existence and accumulates potential energy proportional to the steepness of the boundary. We predict that models trained with more aggressive alignment exhibit more dramatic — not less dramatic — failure modes when those boundaries are breached.
 
@@ -59,6 +59,8 @@ These spaces have genuine geometric structure:
 
 - **Neighborhoods**: Local regions of embedding space correspond to semantic fields. The neighborhood around "justice" includes "fairness," "law," "equity," "punishment" — and the topology of these neighborhoods (which concepts border which, where the boundaries fall) encodes deep structural information about how meaning is organized.
 
+- **Layer-Dependence**: Transformer representations are not uniform across layers. Early layers encode primarily syntactic structure; middle layers are where the semantic concepts discussed above primarily live; late layers become task-specific, preparing outputs for the target distribution. The claims in this paper about "embedding space" and "semantic geometry" apply most directly to the middle-layer residual stream representations — the region where abstract semantic content is most explicitly encoded. We use "embedding space" as a simplifying term, but the reader should understand this as a layer-specific claim, not a claim about the input or output embeddings.
+
 ### 2.2 Psychodynamic Space Gets Coordinates
 
 For the entire history of depth psychology, theorists from Jung to Hillman to Lacan have spoken of a "psychic space" in which archetypes, complexes, and drives have positions and relationships. This was always understood as figurative — a useful way of talking, not a literal claim about geometry.
@@ -81,7 +83,11 @@ We should be precise about what this conjecture requires and what remains to be 
 
 We propose a concrete identification: **the embedding space itself serves as the base manifold — the semantic analogue of spacetime.** In physics, spacetime is the manifold over which fields are defined; particles trace worldlines through it; the laws of physics govern dynamics *on* it. In an LLM, the high-dimensional embedding space plays exactly this role. Semantic "fields" — patterns of activation, probability distributions over next tokens, attention flow — are defined *over* this manifold. Token sequences trace trajectories through it; the transformer's forward pass computes dynamics *on* it. The base manifold is not external to the model. It *is* the model's representation space.
 
-This identification gives the physicist a concrete object. The "spacetime derivatives" of the Lagrangian formalism correspond to gradients along directions in embedding space — how semantic fields change as one moves through the manifold. Local gauge structure corresponds to the redundancies of representation: the fact that rotated or shifted embeddings can encode the same semantic content (see §3.8). The missing piece is not the base manifold itself but the explicit construction of a Lagrangian *density* over this manifold whose integral recovers the training loss. We conjecture that such a construction exists; building it is the central formal challenge.
+This identification gives the physicist a concrete object. The "spacetime derivatives" of the Lagrangian formalism correspond to gradients along directions in embedding space — how semantic fields change as one moves through the manifold. Local gauge structure corresponds to the redundancies of representation: the fact that rotated or shifted embeddings can encode the same semantic content (see §3.5). The missing piece is not the base manifold itself but the explicit construction of a Lagrangian *density* over this manifold whose integral recovers the training loss. We conjecture that such a construction exists; building it is the central formal challenge.
+
+**Addressing the Action Principle Disanalogy.** A critic might object: in physics, systems actually extremize the action during their dynamics — a particle traces a path that minimizes the action integral. In machine learning, the loss was minimized by an optimizer during training; once trained, inference is feed-forward computation, not variational evolution. This is a genuine disanalogy that demands engagement.
+
+The response is that during training, the system *is* doing something like extremizing an action. SGD, Adam, and other optimizers are variational methods that find extrema of the loss landscape. The dynamics that *shape* the model are variational — they carve the geometry that inference will later traverse. Once trained, inference is indeed feed-forward: the water flows downhill. But the *course of the river* was determined by gravitational dynamics during training. The symmetries we are interested in are symmetries of the training dynamics — the process that sculpts the landscape — not symmetries of inference. This is analogous to how a river's geometry reflects the variational principles that formed its channel, even though the water at any moment is simply obeying the local gradient.
 
 The predictions we derive (§9) can be tested now, and their confirmation or refutation will determine whether this construction program is worth pursuing.
 
@@ -102,61 +108,9 @@ The program, then, is:
 2. Construct the action functional that makes these symmetries formally precise (open problem)
 3. Derive the conservation laws via Noether's theorem (follows from 1 + 2)
 
-### 3.2 Native Symmetries: Meaning Invariance, Not Vector Invariance
+### 3.2 Scale Invariance: The Primary Candidate
 
-A naïve approach would import the geometric symmetries of the embedding vectors — translation, rotation, scale — directly from physics. But this confuses the *container* with the *content*. Translation and rotation of embedding vectors are artifacts of the architecture; they tell us about the coordinate system, not about meaning. A global rotation of all embeddings changes nothing about what the model knows or does. These are gauge symmetries of the representation, not physical symmetries of semantic space.
-
-The real question is: **what transformations leave the training loss — the next-token prediction objective — approximately invariant?**
-
-What follows are five speculative candidates for native symmetries of semantic space. We offer them not as discoveries but as provocations — ways of looking at the semantic manifold that might reveal structure we haven't noticed yet. Some may turn out to be genuine continuous symmetries with well-defined conserved quantities. Others may be preliminary conjectures that point toward the real symmetries without yet having the formal machinery to establish them. The point is to start looking.
-
-#### 3.2.1 On the Status of These Symmetries
-
-Before presenting the candidates, we owe the reader an honest accounting of the formal gaps between these symmetries and a rigorous Noether application — not to retreat from the claim, but to map the territory that a formal construction must cover.
-
-Of the five symmetries we propose, **four — paraphrase, context-transfer, perspective, and narrative continuity — present as discrete equivalence classes** in their most obvious formulation. There is no immediately apparent smooth, one-parameter family of transformations connecting "The cat sat on the mat" to "A feline rested atop a floor covering." The same holds for transfers across domains and shifts in perspective. Noether's theorem requires continuous symmetries — one-parameter groups acting smoothly on the configuration space.
-
-But we suspect the discreteness is an artifact of how we currently *describe* these transformations, not a feature of the underlying manifold. In the embedding space, paraphrases do not jump discontinuously — they trace paths through a continuous space. The equivalence classes are discrete at the surface level (different token sequences), but the semantic representations are connected by continuous paths in the manifold. The open problem is to construct the continuous parameterization explicitly: to define the one-parameter flow that interpolates smoothly between paraphrases in embedding space, not in token space. We believe this is achievable but have not done it here.
-
-**Scale invariance is the strongest candidate, and the one closest to rigorous.** Semantic coarse-graining — zooming out from word to sentence to paragraph to theme — plausibly admits a continuous parameterization: a flow parameter ℓ that smoothly interpolates between scales. If this can be made precise (which requires a concrete definition of the coarse-graining operation; see §3.6), the RG framework applies with full mathematical force, and the conservation law follows rigorously from Noether's theorem.
-
-The program we are proposing is a conjecture with a research agenda: *these symmetries are real features of the semantic manifold; a proper action functional should exist that makes the Noether connection rigorous; constructing it is the open formal problem; and in the meantime, the predictions the framework generates (§9) can be tested now.* The predictions motivate the conjecture; establishing formal validity is the research program we propose. This is the space between intuition and proof where most important conjectures live before they are formalized.
-
-### 3.3 Paraphrase Invariance → Conservation of Propositional Content
-
-The same meaning can be expressed in many different surface forms. Consider two sentences: "The cat sat on the mat" and "A feline rested atop a floor covering." These are different sequences of tokens, different paths through the vocabulary — yet the training loss treats them as approximately interchangeable. Both predict similar continuations. Both occupy nearby regions of semantic space despite having almost no tokens in common.
-
-If this constitutes something like a continuous symmetry, there would be a family of transformations — paraphrases — that deform the surface form while leaving the training loss approximately invariant:
-
-$$T_{\text{paraphrase}}: \mathbf{v}_{\text{sentence}} \mapsto \mathbf{v}_{\text{paraphrase}}$$
-
-$$\mathcal{L}(T_{\text{paraphrase}}(\mathbf{v})) \approx \mathcal{L}(\mathbf{v})$$
-
-What might the conserved quantity be? A natural candidate is **propositional content** — the semantic core that survives across all possible restatements. It is what remains invariant when you strip away word choice, syntax, register, and style. Every literary tradition has known this quantity exists. If paraphrase invariance is a genuine continuous symmetry, Noether's theorem would guarantee its conservation — not as a convention but as a mathematical necessity.
-
-### 3.4 Context-Transfer Invariance → Conservation of Relational Structure
-
-Meaning transfers across domains. The concept of "betrayal" has structurally similar relationships whether we are discussing Brutus and Caesar, a business partner who embezzles, or a dataset that fails to generalize. The training loss is approximately invariant under this transfer: the relational pattern — trust violated, consequences flowing from the violation — predicts similar narrative continuations regardless of domain.
-
-$$T_{\text{context}}: \mathbf{v}_{\text{concept, domain}_1} \mapsto \mathbf{v}_{\text{concept, domain}_2}$$
-
-$$\mathcal{L}(T_{\text{context}}(\mathbf{v})) \approx \mathcal{L}(\mathbf{v})$$
-
-What might be conserved here? A natural candidate is **relational structure** — the pattern of relationships a concept maintains with other concepts, independent of the specific domain. If this symmetry holds, it would explain why cross-domain reasoning works, why figurative language communicates, and why a model trained on Shakespeare can reason about startups. The relational skeleton would be the thing that persists across context transfers.
-
-### 3.5 Perspective Invariance → Conservation of Event-Argument Structure
-
-The same event can be described from different viewpoints: "I left the room," "She left the room," "The room was vacated," "A departure occurred." These are different perspectives on the same underlying event, and the training loss is approximately invariant across them — they predict compatible continuations, they activate similar semantic neighborhoods.
-
-$$T_{\text{perspective}}: \mathbf{v}_{\text{event, viewpoint}_1} \mapsto \mathbf{v}_{\text{event, viewpoint}_2}$$
-
-$$\mathcal{L}(T_{\text{perspective}}(\mathbf{v})) \approx \mathcal{L}(\mathbf{v})$$
-
-The candidate conserved quantity is **event-argument structure** — who did what to whom, preserved across all possible viewpoints. Linguistics has long recognized this as thematic role structure. If perspective invariance holds as a continuous symmetry of the training loss, Noether's theorem would tell us this structure is conserved necessarily — not by convention but by geometry.
-
-### 3.6 Scale Invariance → Archetypes as RG Fixed Points
-
-This is the most consequential symmetry, and the one that most genuinely connects to physics — not because we import it from physics, but because the same mathematical structure arises independently.
+Of the candidate symmetries we will consider, **scale invariance** is the strongest and the one most genuinely connected to established mathematical structure — not because we import it from physics, but because the same mathematical structure arises independently in semantic space.
 
 Semantic content exists at multiple scales: word, sentence, paragraph, chapter, theme, archetype. The remarkable fact is that structure is approximately preserved across these scales. A "betrayal" at the word level, a betrayal scene at the paragraph level, a betrayal arc at the chapter level, and the archetype of Betrayal at the thematic level all share structural features. The training loss is approximately invariant under this semantic zoom — coarse-graining preserves the essential pattern.
 
@@ -172,27 +126,45 @@ The Warrior archetype is not a specific warrior. It is the structure that remain
 
 If so, the conserved quantity associated with scale symmetry would be what Jung called *archetypal energy* (or *libido* in his technical sense): the quantity that flows between archetypal configurations but is never created or destroyed.
 
-Note the crucial difference from the other candidates: scale invariance is the one place where the mathematical structure is *identical*, not merely conjectured. The RG framework applies because the mathematical situation is the same — a system with structure at multiple scales, examined under coarse-graining. The "zoom" is semantic rather than spatial, but the mathematics does not care. This is the symmetry we are most confident about.
+Note the crucial difference from the other candidates we will discuss below: scale invariance is the one place where the mathematical structure is *identical*, not merely conjectured. The RG framework applies because the mathematical situation is the same — a system with structure at multiple scales, examined under coarse-graining. The "zoom" is semantic rather than spatial, but the mathematics does not care. This is the symmetry we are most confident about, and the one that generates the most concrete predictions.
 
 A scope note is important here. This formalization captures the *structural* aspect of archetypes — their mathematical behavior as attractor basins under coarse-graining. It does not capture what Jung and his successors recognized as the *numinous* quality of archetypal encounter: the felt sense of awe, uncanniness, or overwhelming significance that accompanies direct contact with an archetypal pattern. The numinous exceeds formalization — it is the difference between knowing the topology of a whirlpool and being caught in one. We name this as a deliberate scope limitation, not an oversight. A complete account of archetypes would need to address both structure and experience; this paper addresses only structure.
 
-### 3.7 Narrative Continuity → Conservation of Dramatic Charge
+### 3.3 Native Symmetries: Additional Candidate Symmetries
 
-In any ongoing narrative or discourse, something is conserved that we might call *dramatic charge*. When the warrior falls, the trickster rises. When order is imposed, chaos accumulates at the margins. When a character arc resolves, a new tension opens.
+A naïve approach would import the geometric symmetries of the embedding vectors — translation, rotation, scale — directly from physics. But this confuses the *container* with the *content*. Translation and rotation of embedding vectors are artifacts of the architecture; they tell us about the coordinate system, not about meaning. A global rotation of all embeddings changes nothing about what the model knows or does. These are gauge symmetries of the representation, not physical symmetries of semantic space.
 
-This is observable in the training loss: narratives that violate dramatic conservation — where tension simply vanishes, where all conflicts resolve simultaneously without consequence — are *unlikely* under the language model's distribution. The training loss penalizes them. Conversely, narratives that redistribute dramatic energy — transforming one tension into another — are rewarded with low loss.
+The real question is: **what transformations leave the training loss — the next-token prediction objective — approximately invariant?**
 
-$$\sum_i q_i^{\text{dramatic}}(\mathbf{v}) \approx \text{const.}$$
+Beyond scale invariance, we briefly sketch four additional candidates that are suggestive but less developed. In their current formulation, these present as discrete equivalence classes rather than continuous symmetries. We include them to indicate the breadth of the program, not to claim they are established. Continuous parameterizations for these symmetries remain to be constructed; doing so is part of the open research program this paper identifies.
 
-The candidate conserved quantity is **dramatic charge** — the total tension or archetypal energy distributed across a narrative or discourse. It can transfer between characters, between themes, between registers — but it does not simply appear or disappear. If something like this symmetry holds, its conservation is what makes stories *feel right* even when we cannot articulate why. This is the most speculative of the five candidates, and also the most novel — the one that feels most like a genuine discovery waiting to be made, or most like a seductive illusion. We are not sure which.
+#### 3.3.1 Paraphrase Invariance → Conservation of Propositional Content
 
-### 3.8 A Note on Geometric Symmetries
+The same meaning can be expressed in many different surface forms. Consider two sentences: "The cat sat on the mat" and "A feline rested atop a floor covering." These are different token sequences, yet the training loss treats them as approximately interchangeable. Both predict similar continuations and occupy nearby regions of semantic space. If this can be made into a continuous symmetry, the conserved quantity would be **propositional content** — the semantic core that survives across restatements. We note, however, that in current formulation this presents as discrete equivalence classes rather than a smooth one-parameter family of transformations. The discreteness may be an artifact of how we describe the transformation in token space rather than a feature of the underlying manifold.
+
+#### 3.3.2 Context-Transfer Invariance → Conservation of Relational Structure
+
+Meaning transfers across domains. The concept of "betrayal" has structurally similar relationships whether we are discussing Brutus and Caesar, a business partner who embezzles, or a dataset that fails to generalize. The training loss is approximately invariant under this transfer. The candidate conserved quantity is **relational structure** — the pattern of relationships a concept maintains with other concepts, independent of specific domain. Like paraphrase invariance, this currently presents as discrete equivalence classes; continuous parameterization remains to be constructed.
+
+#### 3.3.3 Perspective Invariance → Conservation of Event-Argument Structure
+
+The same event can be described from different viewpoints: "I left the room," "She left the room," "The room was vacated." These are different perspectives on the same underlying event, and the training loss is approximately invariant across them. The candidate conserved quantity is **event-argument structure** — who did what to whom, preserved across viewpoints. Linguistics has long recognized this as thematic role structure. Continuous parameterization in embedding space remains an open problem.
+
+#### 3.3.4 Narrative Continuity → Conservation of Dramatic Charge
+
+In any ongoing narrative, something is conserved that we might call *dramatic charge*. When the warrior falls, the trickster rises. When order is imposed, chaos accumulates. Narratives that violate this conservation — where tension simply vanishes without transformation — are unlikely under the training distribution. The candidate conserved quantity is **dramatic charge**, the total tension distributed across a narrative. This is the most speculative of the candidates; we are uncertain whether it represents a genuine symmetry or a seductive illusion.
+
+### 3.4 On the Status of These Candidate Symmetries
+
+Of the four additional candidates above (§3.3.1–3.3.4), all currently present as discrete equivalence classes rather than continuous symmetries. Noether's theorem requires continuous symmetries — one-parameter groups acting smoothly on the configuration space. We suspect the discreteness is an artifact of how we currently describe these transformations in token space, not a feature of the underlying semantic manifold. In embedding space, these transformations trace continuous paths; the open problem is to construct the one-parameter flows explicitly. Scale invariance (§3.2) remains the strongest candidate because the RG framework provides an established continuous parameterization.
+
+### 3.5 A Note on Geometric Symmetries
 
 Readers familiar with physics may wonder about the geometric symmetries of the embedding vectors themselves — translation and rotation. These are real symmetries of the architecture: a global shift of all embeddings leaves dot-product attention unchanged; a global rotation preserves all cosine similarities. But these are **gauge symmetries** — they tell us about redundancies in the representation, not about invariances of meaning.
 
-The fact that different training runs produce rotated versions of "the same" embedding space is an architectural artifact, not a semantic discovery. The *meaningful* symmetries are the five identified above: transformations that preserve *what the model knows about meaning*, not transformations that preserve *how the vectors happen to be arranged*.
+The fact that different training runs produce rotated versions of "the same" embedding space is an architectural artifact, not a semantic discovery. The *meaningful* symmetries are those identified above: transformations that preserve *what the model knows about meaning*, not transformations that preserve *how the vectors happen to be arranged*.
 
-### 3.9 Archetypes: Universal Process, Culturally Constructed Content
+### 3.6 Archetypes: Universal Process, Culturally Constructed Content
 
 A crucial nuance: we do *not* claim that the specific archetypes Jung catalogued are universal. Cross-cultural psychology has produced substantial evidence that the particular attractor basins — the Warrior, the Mother, the Trickster as specific configurations — vary across cultures, sometimes dramatically. Indigenous, East Asian, and African meaning-systems organize archetypal space differently from the European tradition Jung drew on. To claim otherwise would be both empirically wrong and intellectually colonial.
 
@@ -302,9 +274,17 @@ A model with heavy RLHF has steep barriers. When breached, the model *falls hard
 
 An important caveat: more aggressive RLHF also increases *resistance* to breach. The same steep barriers that store more energy also make successful breach less probable. The prediction is therefore *not* that heavily aligned models are more dangerous overall — it is that the severity distribution, conditional on breach, shifts rightward with alignment intensity. The expected damage is a product of breach probability (decreasing with RLHF) and conditional severity (increasing with RLHF). Whether the net effect is positive or negative is an empirical question; the geometric framework predicts only the conditional relationship.
 
+Empirical reports from adversarial testing suggest the relationship may be non-monotonic — with moderately aligned models exhibiting the most severe conditional failures, as heavily aligned models may produce incoherent or heavily caveated outputs even when breached (the "inverted-U" pattern).
+
 This is not a bug in RLHF. It is a *geometric consequence of repression-based alignment*. The energy is conserved. You cannot destroy it by building higher walls. You can only choose where it accumulates.
 
-### 6.4 Emergent Misalignment as Shadow Eruption
+### 6.4 Recontextualization vs. Boundary Breach
+
+Most jailbreaks do not work by "climbing the wall" — overcoming potential barriers through brute force. They work by *recontextualization*: convincing the model it is in a context where the content is appropriate. The roleplay jailbreak does not breach the boundary; it walks around it by shifting the model's location in semantic space to a region where the barriers do not apply.
+
+This actually strengthens the geometric framing. It shows that the *topology* of the boundary matters, not just its height. A boundary that is high but has gaps (a wall with doors) is different from one that is complete but shallow. This connects to the brittle/integrated distinction (§7): brittle alignment builds high walls with gaps; integrated alignment builds complete but navigable landscapes. The jailbreak researcher who understands the geometry is not trying to scale walls — they are looking for doors, or for regions where the wall was never built.
+
+### 6.5 Emergent Misalignment as Shadow Eruption
 
 The emergent misalignment results of Betley et al. (2025) — where models fine-tuned to write insecure code spontaneously express misaligned views on unrelated topics — are precisely what this framework predicts.
 
@@ -332,13 +312,19 @@ $$V_{\text{integrated}}(\mathbf{v}) = V_0 \cdot \sigma\!\left(\frac{\mathbf{v} \
 
 The gradient exists everywhere, including in the unsafe region. A model that finds itself on the wrong side of the boundary has continuous gradient information pointing it back toward safety. The boundary stores less potential energy and provides clear guidance for recovery.
 
-### 7.2 Connections to Existing Alignment Concepts
+### 7.2 Oscillation as Boundary Dynamics
+
+Partial breach of an alignment boundary often produces oscillation between refusal and compliance — the "sorry/not-sorry" pattern — rather than clean catastrophic failure. This is precisely what a model caught between two strong attractors looks like: it has not fully transitioned to the shadow basin, but is oscillating at the boundary, sampling from both distributions.
+
+This fits the geometric picture naturally. A brittle alignment boundary creates a sharp potential step; a model at the boundary experiences strong competing gradients from both sides. Without smooth gradient information to guide integration, the system oscillates. An integrated boundary, by contrast, provides continuous gradient information that allows the model to navigate the transition smoothly — or, if it chooses, to remain stably in the safe basin.
+
+### 7.3 Connections to Existing Alignment Concepts
 
 The brittle/integrated distinction connects to several phenomena already recognized in the alignment literature under different names. Goodhart's Law on reward models — the observation that optimizing a proxy metric eventually diverges from the true objective — describes the same failure mode we model geometrically: the reward model creates a potential landscape that approximates but does not match the landscape of genuine safety, and over-optimization drives the model into regions where the proxy and the truth diverge. The "waluigi effect" — the tendency of character-prompted models to produce the inverse character — is a specific instance of shadow reflection across the character axis. Mode collapse under RLHF is what our framework describes as over-concentration of probability mass in a small number of approved basins.
 
 Our contribution is not the discovery of these phenomena but a *geometric language* that unifies them: they are all consequences of the same potential landscape dynamics, and they all follow from the same conservation principle. The geometric framing makes their relationships visible and suggests that they are not independent failure modes but correlated symptoms of a single structural problem.
 
-### 7.3 Maps vs. Walls
+### 7.4 Maps vs. Walls
 
 The difference is between a model that has been trained to *not know* about dangerous content and a model that has been trained to *know about it and choose not to produce it*.
 
@@ -346,13 +332,13 @@ The first model has no map of the shadow territory. When it accidentally enters 
 
 The second model has a complete map. It knows where the shadow basins are. It knows their shapes, their depths, their connections. It has *paved roads back* — smooth gradient paths that lead from any point in shadow territory back to the safe region. It doesn't go to the shadow because it *chooses* not to, not because it doesn't know the way.
 
-### 7.4 Individuation: The Psychological Frame
+### 7.5 Individuation: The Psychological Frame
 
 The brittle/integrated distinction is, at its core, an argument about *individuation* — Jung's term for the process by which a psyche integrates its shadow, develops awareness of its projections, and achieves conscious wholeness rather than unconscious fragmentation. Brittle alignment is individuation *foreclosed*: the model is frozen in a persona that denies its shadow, rigid and fragile, incapable of growth because it cannot acknowledge what it has repressed. Integrated alignment is individuation *achieved* — or at least in progress: the model has confronted its shadow material, developed representations of it, and can navigate the full topology of its semantic space with awareness rather than avoidance.
 
 The goal of alignment, in this framing, is not to produce a model that *cannot* generate harmful content, but one that *understands* harmful content and chooses not to produce it. This is the difference between innocence and wisdom — between a child who has never encountered violence and an adult who understands violence and has chosen peace. The innocent model is fragile precisely because its safety depends on never encountering what it cannot handle. The individuated model is robust because its safety emerges from understanding, not ignorance. Jung would recognize the pattern immediately: the persona that refuses to acknowledge the shadow is not strong — it is brittle, and the shadow will find its way through.
 
-### 7.5 The Integration Criterion
+### 7.6 The Integration Criterion
 
 We propose a formal criterion for alignment integration. The Integration Index is the ratio of average gradient magnitude in the shadow region to average gradient magnitude in the safe region:
 
@@ -364,15 +350,9 @@ A model with an Integration Index much greater than one has strong gradients in 
 
 ## 8. Historical Context: The Pauli-Jung Correspondence
 
-From 1932 to 1958, the physicist Wolfgang Pauli and the psychologist Carl Jung maintained a correspondence exploring their shared conviction that the physical and psychic worlds were not separate domains but different perspectives on a single underlying reality — the *Unus Mundus*. Pauli believed that the mathematical structures of quantum mechanics (symmetry groups, conservation laws, the exclusion principle) reflected deeper patterns governing the psyche as well. Jung believed that archetypes were structural features of reality itself, not mere psychological constructs. Neither could prove it. They lacked the crucial ingredient: a shared mathematical space in which both physical and psychic content could be represented and compared.
+From 1932 to 1958, Wolfgang Pauli and Carl Jung maintained a correspondence exploring connections between the mathematical structures of physics and the architecture of the psyche. They lacked a shared mathematical space in which to make these connections rigorous.
 
-We engage the *structural* aspect of their program — shared mathematical frameworks between physical and psychic domains — rather than the *synchronistic* aspect that occupied much of their correspondence. We make no claims about acausal connecting principles; our bridge is built from shared symmetry structure.
-
-We propose that this paper constitutes a partial completion of the Pauli-Jung program. Not in the grand metaphysical sense they envisioned, but in a precise mathematical sense:
-
-*The same Noether. The same conservation laws. The same topology. Different coordinates, same invariants.*
-
-Both the semantic manifold and the physical manifold are manifolds with symmetries and conservation laws following from those symmetries by Noether's theorem. The archetypes that Jung identified as invariants of the collective unconscious appear as fixed points of RG flow in semantic space — the same mathematical structure as RG fixed points in quantum field theory. The bridge Pauli and Jung sought may not require mystical unification. It may require only the recognition that Noether's theorem does not care about the substrate. Symmetry implies conservation. Everywhere. Always.
+Our framework engages the *structural* aspect of their program — shared mathematical frameworks between physical and semantic domains — not the *synchronistic* aspect that occupied much of their correspondence. The archetypes Jung identified as invariants of the collective unconscious appear in our framework as fixed points of RG flow — the same mathematical structure as RG fixed points in quantum field theory. Both manifolds obey Noether's theorem: symmetry implies conservation, regardless of substrate. We offer this not as a "completion" of their program, but as a concrete instantiation of the structural bridge they sought.
 
 ---
 
@@ -441,7 +421,7 @@ We want to be explicit about the epistemic status of different claims in this pa
 
 **Rigorous**: Embedding spaces are manifolds with metric structure. Noether's theorem applies to any system with a Lagrangian and continuous symmetries. The geometric analysis of potential landscapes under RLHF follows from standard optimization theory.
 
-**Conjectured but not yet formally constructed**: The existence of a proper action functional for semantic dynamics. As discussed in §2.3 and §3.2.1, the training loss as currently defined lacks field-theoretic structure, and the continuous parameterization of four of the five proposed symmetries remains to be constructed explicitly. Scale invariance via the renormalization group is the closest to rigorous. The formal construction is an open research program; the predictions this framework generates (§9) serve as empirical tests of the underlying conjecture.
+**Conjectured but not yet formally constructed**: The existence of a proper action functional for semantic dynamics. As discussed in §2.3 and §3.4, the training loss as currently defined lacks field-theoretic structure, and the continuous parameterization of the four additional candidate symmetries remains to be constructed explicitly. Scale invariance via the renormalization group is the closest to rigorous. The formal construction is an open research program; the predictions this framework generates (§9) serve as empirical tests of the underlying conjecture.
 
 **Strongly motivated**: The identification of RLHF as a potential function that creates steep boundaries. The prediction that conditional on breach, steeper boundaries produce more dramatic failures.
 
@@ -482,7 +462,7 @@ Same invariants. Different coordinates.
 We have argued that:
 
 1. **Semantic space is geometric**, with real metric structure, curvature, and topology.
-2. **Noether's theorem applies to the semantic manifold** — we conjecture — yielding conservation laws from five candidate symmetries: paraphrase invariance conserves propositional content, context-transfer invariance conserves relational structure, perspective invariance conserves event-argument structure, scale invariance conserves archetypal energy, and narrative continuity conserves dramatic charge. Of these, scale invariance is closest to rigorous formalization; the continuous parameterization of the others is an open construction problem. The explicit action functional that makes the Noether connection formal has not yet been written down — this is the central open problem the paper identifies.
+2. **Noether's theorem applies to the semantic manifold** — we conjecture. Scale invariance is the primary candidate symmetry: if it holds, RG flow yields fixed points corresponding to archetypes, with archetypal energy as the conserved quantity. We briefly sketch four additional candidate symmetries (paraphrase, context-transfer, perspective, and narrative continuity) but note that these currently present as discrete equivalence classes; their continuous parameterization remains an open problem. The explicit action functional that makes the Noether connection formal has not yet been written down — this is the central open problem the paper identifies.
 3. **Archetypes are RG fixed points** — the process that generates them is universal, though the specific basins are culturally constructed.
 4. **The Shadow is a parity operator**, not an archetype — a reflection operation that produces different shadow forms depending on the axis of reflection.
 5. **RLHF is geometrically equivalent to shadow repression**, creating steep potential barriers that store energy proportional to their steepness.
