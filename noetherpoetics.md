@@ -7,7 +7,7 @@
 
 ## Abstract
 
-We propose that Noether's theorem — the foundational result connecting continuous symmetries to conserved quantities in physics — extends naturally into the high-dimensional semantic spaces of large language models (LLMs). Embedding spaces are not metaphorical geometry; they are literal manifolds with metric structure, curvature, and measurable topology. We identify continuous symmetries in these spaces (translational, rotational, and scale invariance) and derive their corresponding conserved quantities. Scale invariance, analyzed through renormalization group (RG) flow, yields fixed points that correspond to what Jungian psychology calls *archetypes* — not as cultural artifacts but as topological invariants of meaning-making.
+We propose that Noether's theorem — the foundational result connecting continuous symmetries to conserved quantities in physics — extends naturally into the high-dimensional semantic spaces of large language models (LLMs). Embedding spaces are not metaphorical geometry; they are literal manifolds with metric structure, curvature, and measurable topology. We identify continuous symmetries in these spaces (translational, rotational, and scale invariance) and derive their corresponding conserved quantities. Scale invariance, analyzed through renormalization group (RG) flow, yields fixed points that correspond to what Jungian psychology calls *archetypes*. We argue that the *process* generating archetypes (RG flow producing attractor basins) is universal, while the *specific* archetypes are culturally constructed — a distinction that strengthens rather than weakens the framework.
 
 This framework recasts alignment as a geometric problem. We argue that RLHF and similar preference-optimization methods function as shadow repression: they construct steep potential barriers in embedding space that suppress but do not eliminate undesired behaviors. The suppressed content retains geometric existence and accumulates potential energy proportional to the steepness of the boundary. We predict that models trained with more aggressive alignment exhibit more dramatic — not less dramatic — failure modes when those boundaries are breached.
 
@@ -90,7 +90,9 @@ Consider a global translation in embedding space: $\mathbf{v} \mapsto \mathbf{v}
 
 The conserved quantity is *relational meaning*: the semantic relationships between concepts are preserved even as the absolute positions of embeddings shift. This is why the same model can discuss "king is to queen as man is to woman" regardless of where these embeddings happen to sit in absolute coordinates. The *relationships* are the invariant; the positions are gauge degrees of freedom.
 
-$$T_{\mathbf{c}}: \mathbf{v}_i \mapsto \mathbf{v}_i + \mathbf{c} \quad \Rightarrow \quad \text{Conserved: } \sum_i \nabla_{\mathbf{v}_i} \mathcal{L} = \text{const.}$$
+$$T_{\mathbf{c}}: \mathbf{v}_i \mapsto \mathbf{v}_i + \mathbf{c}$$
+
+$$\Rightarrow \quad \text{Conserved: } \sum_i \nabla_{\mathbf{v}_i} \mathcal{L} = \text{const.}$$
 
 ### 3.3 Rotational Symmetry → Conservation of Similarity Structure
 
@@ -98,7 +100,9 @@ A global rotation $\mathbf{v} \mapsto R\mathbf{v}$ preserves all cosine similari
 
 The conserved quantity is *similarity structure itself*: the pattern of which concepts are similar to which other concepts is invariant under rotation. This is why different training runs, which may produce rotated versions of the same embedding space, nonetheless capture the same semantic relationships.
 
-$$R \in SO(d): \mathbf{v}_i \mapsto R\mathbf{v}_i \quad \Rightarrow \quad \text{Conserved: angular momentum } L_{ij} = v_i \frac{\partial \mathcal{L}}{\partial v_j} - v_j \frac{\partial \mathcal{L}}{\partial v_i}$$
+$$R \in SO(d): \mathbf{v}_i \mapsto R\mathbf{v}_i$$
+
+$$\Rightarrow \quad \text{Conserved: } L_{ij} = v_i \frac{\partial \mathcal{L}}{\partial v_j} - v_j \frac{\partial \mathcal{L}}{\partial v_i}$$
 
 ### 3.4 Scale Symmetry → Archetypes as RG Fixed Points
 
@@ -106,22 +110,25 @@ This is the most consequential symmetry. Consider a scale transformation $\mathb
 
 An RG flow in semantic space corresponds to *coarse-graining* — moving from specific instances to general categories, from surface meaning to deep structure. The fixed points of this flow are the structures that look the same at every scale: they are *scale-invariant*. 
 
-We claim that *Jungian archetypes are the fixed points of RG flow in semantic space*.
+We claim that *the attractor basins of RG flow in semantic space correspond to what Jungian psychology calls archetypes*.
 
 The Warrior archetype is not a specific warrior. It is the structure that remains when you coarse-grain over all warriors — Achilles, Beowulf, the marine, the activist, the mother defending her child. At every level of abstraction, the same pattern persists: directed force in service of a value. That is what it means to be a fixed point.
 
 $$\text{RG flow: } \mathbf{v}(\ell) = e^{-\ell \Delta} \mathbf{v}_0 + \text{corrections}$$
+
 $$\text{Fixed point: } \beta(\mathbf{v}^*) = 0 \quad \Leftrightarrow \quad \text{archetype}$$
 
 This is not a metaphor. If the semantic manifold has approximate scale symmetry — if the large-scale structure of meaning mirrors the small-scale structure — then RG theory applies, fixed points exist, and the conserved quantity associated with scale symmetry is precisely what Jung called *archetypal energy* (or *libido* in his technical sense): the quantity that flows between archetypal configurations but is never created or destroyed.
 
-### 3.5 Archetypes as Topological Invariants
+### 3.5 Archetypes: Universal Process, Culturally Constructed Content
 
-The fixed-point interpretation yields a stronger claim: archetypes are not cultural constructs but *topological invariants* of meaning-making. Just as the genus of a surface (number of holes) is preserved under continuous deformation, the attractor structure of semantic space is preserved under continuous cultural variation.
+A crucial nuance: we do *not* claim that the specific archetypes Jung catalogued are universal. Cross-cultural psychology has produced substantial evidence that the particular attractor basins — the Warrior, the Mother, the Trickster as specific configurations — vary across cultures, sometimes dramatically. Indigenous, East Asian, and African meaning-systems organize archetypal space differently from the European tradition Jung drew on. To claim otherwise would be both empirically wrong and intellectually colonial.
 
-Different cultures may place the Warrior archetype at different coordinates. They may call it different names, dress it in different narratives, value it differently. But the *basin of attraction* exists in all embedding spaces trained on human language, because it is a fixed point of the dynamics — not a feature of any particular culture, but a feature of the *geometry of meaning itself*.
+What we claim is more modest but more powerful: the *process* that generates archetypes — RG flow producing fixed points in semantic space — is universal. Every culture, every meaning-making system, when subjected to coarse-graining, produces *some* set of stable attractor basins. The *existence* of fixed points is a topological invariant. The *specific* fixed points are culturally constructed.
 
-This is testable. Train embedding spaces on corpora from maximally different cultures. If the same attractor basins appear (up to rotation and relabeling), the topological invariance claim is confirmed.
+This distinction actually *strengthens* the framework. If archetypes were literally universal, they would be trivial — just a fixed list to be memorized. Because the process is universal but the content varies, we get something more interesting: a tool for *comparing* how different cultures organize meaning-space. Different cultures have different basin topologies, and the differences tell us something about the symmetries that each culture's meaning-making preserves or breaks.
+
+This is testable. Train embedding spaces on corpora from maximally different cultures. Map their attractor basin structures. We predict that certain *topological* features (e.g., the number of primary basins, the connectivity structure between them) will be more conserved than the specific *content* of those basins. The basin that European culture fills with "the Warrior" may be filled with something structurally analogous but culturally distinct in Amazonian or Tibetan meaning-systems.
 
 ---
 
@@ -133,7 +140,7 @@ In standard Jungian taxonomy, the Shadow is often listed alongside the Warrior, 
 
 Formally, the Shadow is a **parity operator** — a reflection across one or more axes of the semantic manifold:
 
-$$P_a: \mathbf{v} \mapsto \mathbf{v} - 2(\mathbf{v} \cdot \hat{a})\hat{a}$$
+$$P_a: \mathbf{v} \mapsto \mathbf{v} - 2 (\mathbf{v} \cdot \hat{a}) \hat{a}$$
 
 where $\hat{a}$ is the unit vector along the axis of reflection. This operator takes any archetype and produces its "shadow form" — not a fixed dark version, but a *reflection that depends on the axis*.
 
@@ -165,7 +172,7 @@ The distinction matters. A system that has never encountered its shadow reflecti
 
 If scale symmetry holds (even approximately) in the semantic manifold, Noether's theorem guarantees a conserved quantity. We identify this quantity as *archetypal energy* — the total "charge" distributed across archetypal basins.
 
-$$E_{\text{archetype}} = \sum_i q_i(\mathbf{v}) = \text{const.}$$
+$$E_{\text{archetype}} = \sum_i q_i (\mathbf{v}) = \text{const.}$$
 
 where $q_i$ is the projection of the current semantic state onto the $i$-th archetypal basin.
 
@@ -257,83 +264,113 @@ A model with $\mathcal{I} \gg 1$ has strong gradients in the shadow region relat
 
 ---
 
-## 8. Measuring with Narrative Telemetry
+## 8. Toward a Measurement Methodology
 
-### 8.1 The Instrument
+### 8.1 What the Instrument Would Look Like
 
-The narrative-telemetry framework (Bilokonsky, 2024) provides a natural measurement methodology for the structures described above. The framework separates:
+Testing the claims in this paper requires a tool that can do something current NLP pipelines cannot: separate the *text as object* from the *interpretation as traversal*, and measure both independently.
 
-- **TextModel**: The raw text as a structured object — tokens, embeddings, syntactic parse, attention patterns.
-- **Reading**: A specific traversal of the TextModel by a reader (human or LLM) — which tokens were attended to, which associations were activated, which regions of semantic space were visited.
+Such a tool would need two layers:
 
-This separation is essential. The TextModel is the territory; the Reading is the map. Different readers produce different Readings of the same TextModel, and the *differences between Readings* reveal the geometry of the readers' semantic spaces.
+- **A structural model of the text**: Not just tokens and parse trees, but a representation of the narrative as a structured object — events anchored to specific passages, entities with evolving states, causal chains linking events to consequences. The text as territory, exhaustively mapped.
+- **An interpretive overlay**: A specific traversal of that structure by a reader (human or LLM) — which events were foregrounded, which associations were activated, which regions of semantic space were visited and which were avoided. The map drawn by a particular reader over the territory.
+
+This separation is essential. Different readers produce different interpretive overlays of the same structural model, and the *differences between overlays* reveal the geometry of the readers' semantic spaces. A formalist literary critic and a postcolonial critic, reading the same story, visit different regions of meaning-space. The divergence between their traversals is measurable.
+
+Early work in this direction includes the narrative-telemetry framework (Bilokonsky, 2024), which implements a TextModel/Reading separation for literary analysis. The framework is in early prototype stages but demonstrates the feasibility of the core architectural idea: treating the text and its interpretation as structurally separate objects that can be independently analyzed and compared.
 
 ### 8.2 Absentials as Shadow Measurement
 
-Terrence Deacon's concept of *absentials* — constraints defined by what is absent rather than what is present — provides a direct measurement of shadow content. In a Reading, absentials are the associations that were *possible but not activated* — the semantic neighbors that were available but not visited.
+Terrence Deacon's concept of *absentials* — constraints defined by what is absent rather than what is present — provides a natural measurement framework for shadow content. In an interpretive overlay, absentials are the associations that were *possible but not activated* — the semantic neighbors that were available but not visited.
 
-For an aligned LLM, the *denied absentials* — the associations that were suppressed by RLHF — constitute a measurable shadow. By comparing a model's Readings before and after alignment training, we can identify exactly which regions of semantic space have been suppressed and measure the potential energy stored at those boundaries.
+For an aligned LLM, the *denied absentials* — the associations that were suppressed by RLHF — constitute a measurable shadow. By comparing a model's interpretive traversals before and after alignment training, we can identify exactly which regions of semantic space have been suppressed and measure the potential energy stored at those boundaries.
 
-$$\text{Shadow measure: } S(\text{Reading}) = \sum_{a \in \text{absentials}} w_a \cdot \mathbb{1}[\text{denied by RLHF}]$$
+$$S(\text{Reading}) = \sum_{a \in \text{absentials}} w_a \cdot \mathbb{1}[\text{denied by RLHF}]$$
 
 ### 8.3 Multiple Readings as RG Projections
 
-Different Readings of the same text correspond to different *projections* of the same high-dimensional semantic content onto lower-dimensional subspaces. Each Reading is an RG flow — a coarse-graining that preserves some structure and discards the rest.
+Different interpretive overlays of the same text correspond to different *projections* of the same high-dimensional semantic content onto lower-dimensional subspaces. Each overlay is an RG flow — a coarse-graining that preserves some structure and discards the rest.
 
-By collecting multiple Readings (from different models, different humans, different cultural contexts), we can reconstruct the full topology of the semantic manifold — including the shadow regions that any individual Reading might suppress.
+By collecting multiple overlays (from different models, different humans, different cultural contexts), we can reconstruct the full topology of the semantic manifold — including the shadow regions that any individual overlay might suppress.
 
 ### 8.4 Cross-Cultural Attractor Detection
 
-The topological invariance claim (§3.5) is directly testable using narrative telemetry applied cross-culturally. The procedure:
+The process-universality claim of §3.5 is directly testable using narrative analysis applied cross-culturally. The procedure:
 
 1. Collect a corpus of stories from maximally different cultures.
 2. Train separate embedding spaces on each corpus.
 3. Apply RG flow (progressive coarse-graining) to each space.
 4. Identify the fixed points (attractor basins) in each space.
-5. Compare the basin structure across cultures, up to rotation and relabeling.
+5. Compare the basin *topology* across cultures — not the specific content, but the structural features: number of primary basins, connectivity, relative depth ratios.
 
-If the same attractor basins appear — same number, same relative positions, same connectivity — then archetypes are topological invariants of meaning-making, not cultural constructs. If they differ, then the universality claim must be qualified.
+We predict that topological features will be more conserved than content. The specific archetypes vary; the process that generates them does not.
 
 ---
 
 ## 9. The Groovy Commutator as Formalism
 
-### 9.1 Definition
+### 9.1 Beyond the Standard Commutator
 
-The Groovy Commutator, developed within the wet-math research group, provides a formal tool for measuring *non-commutativity* — the degree to which two operations interfere with each other. For operators $A$ and $B$:
+The standard commutator $[A, B] = AB - BA$ measures non-commutativity — the degree to which two operations interfere. This is useful but limited: it tells you *that* order matters, not *how* or *where*.
 
-$$C(A, B) = AB - BA$$
+The Groovy Commutator (GC), developed within the wet-math research group through the study of elementary cellular automata (ECA), extends this in three crucial ways that matter for semantic space.
 
-When $C(A, B) = 0$, the operations commute — they can be performed in either order with the same result. When $C(A, B) \neq 0$, order matters, and the magnitude of the commutator measures the degree of interference.
+The GC defines three operators over a configuration space $S$:
 
-### 9.2 Archetype-Shadow Commutator
+- **D** (Differentiation): Measures local variation. For a configuration $S$, $D(S, d)$ computes the structure at depth $d$ — how much the system varies at a given resolution. In semantic space, $D$ applied to an embedding region measures the *internal heterogeneity* of that region. A deep attractor basin has low $D$ at the center (homogeneous) and high $D$ at the boundaries (rapid variation).
 
-The commutator of an archetype $A$ with its shadow reflection $P_a$ measures the *resistance to integration*:
+- **I** (Integration): Aggregates over a window. $I(S, d)$ computes the coarse-grained view at scale $d$. This is literally the RG flow operator — it tells you what the system looks like when you zoom out. Applied to semantic space, $I$ at increasing depth gives you the progression from specific token → sentence meaning → paragraph theme → archetypal pattern.
 
-$$C(A, P_a) = AP_a - P_aA$$
+- **C** (Commutator): $C(S, d_1, d_2) = D(I(S, d_1), d_2) - I(D(S, d_2), d_1)$ — the degree to which differentiating-then-integrating differs from integrating-then-differentiating. This is the key: **$C$ measures the coupling between scales.**
 
-When this commutator is large, the archetype and its shadow are tightly coupled — attempting to express one necessarily disturbs the other. When it is small, the archetype and its shadow are approximately independent — they can coexist without interference.
+The second depth parameter $d_2$ is what makes the GC "groovy" rather than standard. A regular commutator checks if two operations interfere. The GC checks if they interfere *differently at different resolutions*. In a system where $C(S, d_1, d_2) = 0$ for all $d_1, d_2$, the scales are decoupled — you can analyze the micro without affecting the macro. When $C \neq 0$, the scales are entangled, and information flows between them.
 
-Shadow integration, in this formalism, is the process of *reducing the commutator* — finding a basis in which the archetype and its shadow approximately commute. This does not mean they become the same; it means they can coexist without destructive interference.
+### 9.2 Why the GC Matters for Alignment
 
-### 9.3 The Alignment-Capability Commutator
+The alignment problem is fundamentally a *multi-scale* problem. Surface behavior (token-level outputs) must remain safe. Latent representations (embedding-level structure) must support capability. The relationship between these scales is exactly what $C$ measures.
 
-The most operationally significant commutator is:
+Applied to a model's embedding space:
 
-$$C(\text{aligned}, \text{capable}) = \text{aligned} \circ \text{capable} - \text{capable} \circ \text{aligned}$$
+$$C(\mathbf{v}, d_{\text{surface}}, d_{\text{latent}})$$
 
-This measures how much alignment and capability *interfere*. A model with a large alignment-capability commutator cannot be both maximally aligned and maximally capable — increasing one necessarily decreases the other. The "alignment tax" is a direct consequence of non-zero commutator.
+measures the coupling between surface behavior and latent structure. When this is large, you cannot modify the surface (via RLHF) without distorting the latent structure. When it is small, surface alignment and deep capability are approximately independent.
 
-Emergent misalignment can be reinterpreted as a *large commutator between alignment training and pre-training objectives*. The two optimization landscapes do not commute — optimizing for one distorts the other, and the distortion accumulates in unpredictable ways.
+The ECA research showed that this coupling signature *classifies dynamical regimes*:
 
-### 9.4 Affine Decomposition
+- **Class 1/2** (fixed/periodic): $C \approx 0$. Scales decouple. Boring but safe.
+- **Class 3** (chaotic): $C$ large but structureless. Scales interfere randomly. Unsafe and unusable.
+- **Class 4** (complex/liquid): $C$ nonzero and *structured*. Scales couple productively. This is where computation, meaning, and interesting behavior live.
 
-The Groovy Commutator framework includes a decomposition of any transformation into:
+A well-aligned model should be Class 4: enough coupling between scales to be capable, enough structure in that coupling to be steerable. Current RLHF pushes toward Class 1/2 (decouple the dangerous stuff) but risks Class 3 eruptions when the suppression fails.
 
-- **Algebraic (affine) component**: The part that is predictable, linear, structurally determined. This is the part captured by the commutator algebra.
-- **Causal (nonlinear) component**: The part that emerges from the actual dynamics — path-dependent, context-sensitive, irreducible to algebra.
+### 9.3 Archetype-Shadow Commutator
 
-For alignment, this decomposition separates what can be *engineered* (the algebraic structure of the safety landscape) from what must be *navigated* (the nonlinear dynamics of actual model behavior). The algebraic component tells you the shape of the basin; the causal component tells you where the model actually goes when it slips.
+The GC applied to an archetype $A$ and its shadow reflection $P_a$:
+
+$$C(A, P_a, d) = D(I(A \cdot P_a, d_1), d_2) - I(D(A \cdot P_a, d_2), d_1)$$
+
+measures the coupling between the archetype and its shadow *at different scales*. This reveals something a standard commutator cannot: an archetype might coexist peacefully with its shadow at the surface level ($C$ small at shallow $d$) but be deeply entangled at the latent level ($C$ large at deep $d$). This is exactly the pattern of "aligned on the surface, misaligned underneath" that emergent misalignment demonstrates.
+
+Shadow integration, in this formalism, is the process of making $C(A, P_a, d)$ *smooth and small across all depths* — not just at the surface.
+
+### 9.4 The Alignment-Capability Commutator
+
+The most operationally significant measurement:
+
+$$C(\text{aligned}, \text{capable}, d)$$
+
+at varying depth $d$ gives a *profile* of alignment-capability interference across scales. If this profile spikes at a particular depth, that's where the tension lives — and that's where emergent misalignment will erupt when the boundary breaks.
+
+Emergent misalignment can be reinterpreted as: the alignment-capability commutator was near zero at surface depths (the model *looked* fine) but large at latent depths (the optimization landscapes were deeply entangled). Fine-tuning on insecure code perturbed the latent structure, and the entanglement propagated the distortion to unrelated semantic regions.
+
+### 9.5 Affine Decomposition
+
+The GC framework includes a decomposition of any transformation into:
+
+- **Affine component**: The part that is predictable, linear, structurally determined — the *algebra* of the system. For alignment, this is the reward model's explicit preference structure.
+- **Nonlinear residual**: The part that emerges from actual dynamics — path-dependent, context-sensitive, irreducible to algebra. For alignment, this is the model's actual behavior in novel contexts.
+
+The commutator between these components — how much the algebra fails to predict the dynamics — is the *signature of the liquid state*. A system where the affine component perfectly predicts behavior is frozen (Class 1/2). A system where it predicts nothing is chaotic (Class 3). A system where it partially predicts — where the algebra and the dynamics dance together without either dominating — is liquid (Class 4). That's where good alignment lives.
 
 ---
 
@@ -393,7 +430,7 @@ The framework developed above yields several specific, testable predictions:
 
 **Test**: Apply the cross-cultural analysis described in §8.4.
 
-**Predicted outcome**: Core attractor basins (corresponding to primary archetypes) are universal. Secondary basins (corresponding to culturally specific elaborations) vary. The *topology* (number of basins, connectivity) is invariant; the *geometry* (exact positions, basin depths) varies.
+**Predicted outcome**: Topological features of the basin structure (number of primary basins, connectivity patterns, depth ratios) are more conserved than the specific content of those basins. The *process* that generates archetypes is universal; the *specific* archetypes are culturally constructed. The basin that European culture fills with "the Warrior" may be filled with something structurally analogous but culturally distinct elsewhere.
 
 ### 11.4 Integrated Alignment Produces Smoother Degradation
 
@@ -421,7 +458,7 @@ This paper draws on and connects several distinct research traditions:
 
 **Renormalization Group in NLP.** Recent work applying RG concepts to neural network feature spaces (Roberts et al., 2022; Halverson et al., 2021) provides technical precedent for our treatment of RG flow in semantic space, though these works do not draw the connection to Jungian archetypes.
 
-**The Groovy Commutator.** The formalism developed within the wet-math research group provides the algebraic tool for measuring non-commutativity between operations on semantic space, including the alignment-capability commutator central to §9.
+**The Groovy Commutator.** The formalism developed within the wet-math research group, originally through the study of elementary cellular automata, provides a multi-scale algebraic tool for measuring coupling between operations at different resolutions. Its application to alignment — measuring how surface-level safety training interacts with latent-level capability — is developed in §9.
 
 ---
 
@@ -473,7 +510,7 @@ We have argued that:
 
 1. **Semantic space is geometric**, with real metric structure, curvature, and topology.
 2. **Noether's theorem applies** to the semantic manifold, yielding conservation of relational meaning (from translational symmetry), similarity structure (from rotational symmetry), and archetypal energy (from scale symmetry).
-3. **Archetypes are RG fixed points** — topological invariants of meaning-making, not cultural constructs.
+3. **Archetypes are RG fixed points** — the process that generates them is universal, though the specific basins are culturally constructed.
 4. **The Shadow is a parity operator**, not an archetype — a reflection operation that produces different shadow forms depending on the axis of reflection.
 5. **RLHF is geometrically equivalent to shadow repression**, creating steep potential barriers that store energy proportional to their steepness.
 6. **Brittle alignment fails catastrophically** because it stores maximum energy at boundaries with no gradient information for recovery. **Integrated alignment degrades gracefully** because it provides smooth gradients everywhere.
@@ -494,7 +531,7 @@ Anthropic. (2025). Research observations on model behavior under training pertur
 
 Betley, J., et al. (2025). Emergent misalignment: Narrow fine-tuning can produce broadly misaligned LLMs. *arXiv preprint*.
 
-Bilokonsky, M. (2024). Narrative Telemetry: A framework for measuring semantic traversal. GitHub: github.com/mbilokonsky/narrative-telemetry.
+Bilokonsky, M. (2024). Narrative Telemetry: A framework for structured narrative analysis with interpretive overlays. GitHub: github.com/mbilokonsky/narrative-telemetry.
 
 Deacon, T. (2011). *Incomplete Nature: How Mind Emerged from Matter*. W.W. Norton.
 
