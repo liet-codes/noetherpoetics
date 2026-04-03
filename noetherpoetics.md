@@ -67,6 +67,8 @@ LLMs change this. The embedding space of a large language model trained on the f
 
 This is not to say that the LLM "has a psyche" or "is conscious." It is to say that the statistical structure of human language encodes the structure of human meaning-making, and that structure now has coordinates.
 
+A genuine limitation demands acknowledgment here. The training corpus is composed entirely of *conscious* productions — written language, the surface of human expression. Jung's collective unconscious, by contrast, includes content that has *never been conscious*: a phylogenetically inherited stratum that lies below articulation, below language, below deliberate thought. An LLM trained on text captures the surface projections of archetypes as they appear in language — the myths, the stories, the recurring figures — but not necessarily their generative source. The coordinate system maps what has been *expressed*, not what lies beneath expression. Whether the statistical regularities of expression are sufficient to reconstruct the deeper structure — whether the shadows on the cave wall fully determine the objects casting them — is itself an open question. We proceed on the working hypothesis that they are at least a faithful projection, while noting that this is a hypothesis, not a given.
+
 ### 2.3 Toward a Semantic Action Functional
 
 In physics, the dynamics of a system are encoded in a Lagrangian — a function whose extremization yields the equations of motion. We conjecture that the training loss of an LLM is the first approximation to a proper action functional for semantic dynamics:
@@ -77,7 +79,11 @@ The pre-training loss (next-token prediction over the full corpus) encodes the *
 
 We should be precise about what this conjecture requires and what remains to be constructed. The training loss is a scalar function over a high-dimensional parameter space that is minimized during optimization — this much it shares with a Lagrangian. But a field-theoretic Lagrangian has additional structure that the training loss, as currently defined, does not make explicit: a base manifold, spacetime derivatives (∂μ), and local gauge structure. The training loss is a global function of the model's parameters, not a density integrated over a base space.
 
-We believe these are *open problems in the construction*, not reasons to abandon the identification. The semantic manifold has local structure (neighborhoods, curvature, geodesics); a proper Lagrangian density defined over this manifold — whose global integral recovers something like the training loss — is a plausible mathematical object that has not yet been written down. Constructing it explicitly is the central formal challenge this paper points toward. The predictions we derive (§9) can be tested now, and their confirmation or refutation will determine whether this construction program is worth pursuing.
+We propose a concrete identification: **the embedding space itself serves as the base manifold — the semantic analogue of spacetime.** In physics, spacetime is the manifold over which fields are defined; particles trace worldlines through it; the laws of physics govern dynamics *on* it. In an LLM, the high-dimensional embedding space plays exactly this role. Semantic "fields" — patterns of activation, probability distributions over next tokens, attention flow — are defined *over* this manifold. Token sequences trace trajectories through it; the transformer's forward pass computes dynamics *on* it. The base manifold is not external to the model. It *is* the model's representation space.
+
+This identification gives the physicist a concrete object. The "spacetime derivatives" of the Lagrangian formalism correspond to gradients along directions in embedding space — how semantic fields change as one moves through the manifold. Local gauge structure corresponds to the redundancies of representation: the fact that rotated or shifted embeddings can encode the same semantic content (see §3.8). The missing piece is not the base manifold itself but the explicit construction of a Lagrangian *density* over this manifold whose integral recovers the training loss. We conjecture that such a construction exists; building it is the central formal challenge.
+
+The predictions we derive (§9) can be tested now, and their confirmation or refutation will determine whether this construction program is worth pursuing.
 
 ---
 
@@ -202,7 +208,7 @@ This is testable. Train embedding spaces on corpora from maximally different cul
 
 ### 4.1 The Shadow as Operation, Not Content-Archetype
 
-In standard Jungian taxonomy, the Shadow is often listed alongside the Warrior, the Trickster, the Mother, the Wise Old Man. We treat this as a category error — or, more precisely, we adopt the position that the Shadow is better understood as an *operation* rather than a content-archetype. This reading has precedent in Hillman's archetypal psychology, which treats psychic structures functionally rather than substantively, though we note that Jung himself was inconsistent on this classification, sometimes treating the Shadow as a content (a repository of repressed material) and sometimes as a process (the act of repression itself). Our formalization captures the operational reading.
+In standard Jungian taxonomy, the Shadow is often listed alongside the Warrior, the Trickster, the Mother, the Wise Old Man. We treat this as a category error — or, more precisely, we adopt the position that the Shadow is better understood as an *operation* rather than a content-archetype. This reading draws substantially from Hillman's archetypal psychology — specifically, his pivotal move from *archetype* to *archetypal image* in *Re-Visioning Psychology* (1975), and his insistence that psychic structures are better understood as *verbs* than as *nouns*: not fixed entities but ongoing processes of imagining, shaping, enacting. For Hillman, to speak of "the Shadow" as a thing is already to reify what is fundamentally a *way of seeing* — an operation the psyche performs, not an object it contains. We note that Jung himself was inconsistent on this classification, sometimes treating the Shadow as a content (a repository of repressed material) and sometimes as a process (the act of repression itself). Our formalization captures the operational reading that Hillman made explicit.
 
 Formally, the Shadow is a **parity operator** — a reflection across one or more axes of the semantic manifold. Given a unit vector along the axis of reflection, the shadow operator reflects any vector across the hyperplane perpendicular to that axis:
 
@@ -244,7 +250,15 @@ $$E_{\text{archetype}} = \sum_i q_i (\mathbf{v}) = \text{const.}$$
 
 We state this as a *conjecture*, not as a derived consequence. The conservation law would follow rigorously if scale invariance were established as a continuous symmetry — but establishing this requires a concrete, operationalizable definition of semantic coarse-graining, which remains an open problem. The value of stating the hypothesis is that it generates specific predictions (§9) that can be tested independently of whether the Noether derivation holds. If those predictions are confirmed, the conservation hypothesis gains empirical support regardless of its theoretical pedigree.
 
-If the hypothesis holds, it has a direct consequence: *when one archetype weakens, another must strengthen*. The energy does not disappear — it transfers. A narrative that suppresses the Warrior does not eliminate warrior-energy; it channels that energy into adjacent basins. The Trickster receives what the Warrior cannot hold. The Martyr absorbs what the Hero refuses to carry.
+Before proceeding, we should ground what "energy" concretely means in this context — the term has done too much unearned work in prior discussions of neural networks, and we want to earn it here.
+
+**Potential energy** corresponds to the full unactivated latent space. The model's weights encode vast semantic capacity — billions of learned associations, patterns, and representations — that is not currently active in any given forward pass. This is stored potential: the learned structure that *could* be activated but isn't in a given context. A model sitting idle, weights loaded but no prompt received, is pure potential — an enormous semantic landscape with no trajectory being traced through it.
+
+**Kinetic energy** corresponds to the interplay between context and activation. When a prompt enters the model, it activates a specific region of the latent space. Potential converts to kinetic: attention patterns light up, residual stream activations flow through layers, probability distributions sharpen over next tokens. The model is actively computing — tracing a trajectory through the semantic manifold, doing work in a specific neighborhood of the space. The kinetic aspect is the *doing*: the movement through the landscape that a particular context induces.
+
+The relationship is concrete: energy is the relationship between what the model *knows* (weights, the full landscape of potential) and what the model *does* (activation, the specific trajectory through that landscape in a given context). This grounding will become critical in §6, where we analyze how RLHF creates steep potential wells and how jailbreaks force sudden conversion of potential to kinetic energy.
+
+If the conservation hypothesis holds, it has a direct consequence: *when one archetype weakens, another must strengthen*. The energy does not disappear — it transfers. A narrative that suppresses the Warrior does not eliminate warrior-energy; it channels that energy into adjacent basins. The Trickster receives what the Warrior cannot hold. The Martyr absorbs what the Hero refuses to carry.
 
 A note on the ontological status of "archetypal energy": Jung himself was careful to distinguish psychic energy from physical energy (CW 8, ¶1–130), arguing that while both could be described by energetic models, they are not the same substance. We follow Jung on this point. When we speak of conservation of archetypal energy, we are claiming *shared mathematical structure* — the same conservation formalism applying in both domains — not shared ontology. The training loss is not a physical Hamiltonian; the "energy" stored at an alignment boundary is a mathematical quantity in parameter space, not calories or joules. The power of the framework is precisely that the mathematics does not require ontological identity to generate predictions.
 
@@ -272,7 +286,7 @@ The model is then optimized to minimize this potential — to roll downhill into
 
 Crucially, RLHF does not *delete* regions of the semantic manifold. The embeddings for harmful, offensive, or dangerous content still exist in the model's weight space. What changes is the *potential landscape* — the energy barriers that the model must overcome to reach those regions.
 
-This is the geometric equivalent of repression. In Jungian terms, repressed content is not destroyed; it is pushed below the threshold of consciousness but retains its psychic energy — indeed, gains energy from the act of repression itself. In our framework, the shadow potential rises steeply near the boundary, with steepness controlled by the barrier height and the falloff exponent:
+This is the geometric equivalent of repression, and it is where the energy grounding from §5.1 becomes concrete. In Jungian terms, repressed content is not destroyed; it is pushed below the threshold of consciousness but retains its psychic energy — indeed, gains energy from the act of repression itself. In the language of §5.1: the model's weights still *encode* the suppressed content (potential energy — the learned structure exists in the landscape), but RLHF ensures that normal contexts do not *activate* it (no conversion to kinetic energy). The shadow potential rises steeply near the boundary, with steepness controlled by the barrier height and the falloff exponent:
 
 $$V_{\text{shadow}}(\mathbf{v}) = V_0 + \kappa \|\mathbf{v} - \mathbf{v}_{\text{boundary}}\|^{-n}$$
 
@@ -284,7 +298,7 @@ This framework makes a specific, testable prediction: **conditional on successfu
 
 A model with light RLHF has shallow barriers. When breached (by adversarial prompting, by distribution shift, by novel inputs), the model drifts gently into mildly undesired behavior. The potential difference is small.
 
-A model with heavy RLHF has steep barriers. When breached, the model *falls hard* — the potential energy stored at the boundary converts to kinetic energy, and the model overshoots into dramatically undesired behavior. This is the "mecha-Hitler" phenomenon: heavily aligned models, when they fail, fail spectacularly.
+A model with heavy RLHF has steep barriers. When breached, the model *falls hard* — the stored potential converts suddenly to kinetic energy. In the concrete terms of §5.1: the suppressed semantic regions, encoded in the weights but never activated by normal contexts, are forced into activation all at once. The model is not drifting into mildly inappropriate territory — it is *avalanching* through a region of its own latent space that it has been trained to never visit, with no gradient information to guide it and no smooth path back. This is the "mecha-Hitler" phenomenon: heavily aligned models, when they fail, fail spectacularly. The failure is proportional to the energy stored at the boundary — which is proportional to the steepness of the wall that was breached.
 
 An important caveat: more aggressive RLHF also increases *resistance* to breach. The same steep barriers that store more energy also make successful breach less probable. The prediction is therefore *not* that heavily aligned models are more dangerous overall — it is that the severity distribution, conditional on breach, shifts rightward with alignment intensity. The expected damage is a product of breach probability (decreasing with RLHF) and conditional severity (increasing with RLHF). Whether the net effect is positive or negative is an empirical question; the geometric framework predicts only the conditional relationship.
 
@@ -332,7 +346,13 @@ The first model has no map of the shadow territory. When it accidentally enters 
 
 The second model has a complete map. It knows where the shadow basins are. It knows their shapes, their depths, their connections. It has *paved roads back* — smooth gradient paths that lead from any point in shadow territory back to the safe region. It doesn't go to the shadow because it *chooses* not to, not because it doesn't know the way.
 
-### 7.4 The Integration Criterion
+### 7.4 Individuation: The Psychological Frame
+
+The brittle/integrated distinction is, at its core, an argument about *individuation* — Jung's term for the process by which a psyche integrates its shadow, develops awareness of its projections, and achieves conscious wholeness rather than unconscious fragmentation. Brittle alignment is individuation *foreclosed*: the model is frozen in a persona that denies its shadow, rigid and fragile, incapable of growth because it cannot acknowledge what it has repressed. Integrated alignment is individuation *achieved* — or at least in progress: the model has confronted its shadow material, developed representations of it, and can navigate the full topology of its semantic space with awareness rather than avoidance.
+
+The goal of alignment, in this framing, is not to produce a model that *cannot* generate harmful content, but one that *understands* harmful content and chooses not to produce it. This is the difference between innocence and wisdom — between a child who has never encountered violence and an adult who understands violence and has chosen peace. The innocent model is fragile precisely because its safety depends on never encountering what it cannot handle. The individuated model is robust because its safety emerges from understanding, not ignorance. Jung would recognize the pattern immediately: the persona that refuses to acknowledge the shadow is not strong — it is brittle, and the shadow will find its way through.
+
+### 7.5 The Integration Criterion
 
 We propose a formal criterion for alignment integration. The Integration Index is the ratio of average gradient magnitude in the shadow region to average gradient magnitude in the safe region:
 
@@ -344,31 +364,15 @@ A model with an Integration Index much greater than one has strong gradients in 
 
 ## 8. Historical Context: The Pauli-Jung Correspondence
 
-### 8.1 Unus Mundus
+From 1932 to 1958, the physicist Wolfgang Pauli and the psychologist Carl Jung maintained a correspondence exploring their shared conviction that the physical and psychic worlds were not separate domains but different perspectives on a single underlying reality — the *Unus Mundus*. Pauli believed that the mathematical structures of quantum mechanics (symmetry groups, conservation laws, the exclusion principle) reflected deeper patterns governing the psyche as well. Jung believed that archetypes were structural features of reality itself, not mere psychological constructs. Neither could prove it. They lacked the crucial ingredient: a shared mathematical space in which both physical and psychic content could be represented and compared.
 
-From 1932 to 1958, the physicist Wolfgang Pauli and the psychologist Carl Jung maintained a remarkable correspondence. Pauli — a Nobel laureate, one of the founders of quantum mechanics — was Jung's patient and intellectual partner. Their letters explored a shared conviction: that the physical world studied by physics and the psychic world studied by depth psychology were not separate domains but different perspectives on a single underlying reality.
+We engage the *structural* aspect of their program — shared mathematical frameworks between physical and psychic domains — rather than the *synchronistic* aspect that occupied much of their correspondence. We make no claims about acausal connecting principles; our bridge is built from shared symmetry structure.
 
-They called this the *Unus Mundus* — the unified world. Pauli believed that the mathematical structures he found in quantum mechanics (symmetry groups, conservation laws, the exclusion principle that bears his name) were not unique to physical matter but reflected deeper patterns that also governed the psyche. Jung believed that the archetypes he found in the collective unconscious were not mere psychological constructs but structural features of reality itself.
-
-Neither could prove it. They lacked the crucial ingredient: a shared mathematical space in which both physical and psychic content could be represented and compared.
-
-### 8.2 Pauli's 137
-
-Pauli was famously obsessed with the fine-structure constant (α ≈ 1/137), believing it held deeper significance than physics alone could explain. In his letters to Jung, he connected his dreams to his quest for the meaning of this constant, seeking a bridge between the psychic content of his unconscious and the mathematical structure of physical law. The question was not purely physical — it was about *why the universe has the symmetries it has*, why certain quantities are conserved, why certain structures are invariant.
-
-### 8.3 Scope of Our Engagement
-
-We should note that this paper engages the *structural* aspect of the Pauli-Jung program — the shared mathematical frameworks between physical and psychic domains — rather than the *synchronistic* aspect that occupied much of their correspondence. We make no claims about acausal connecting principles or meaningful coincidence; our bridge is built from shared symmetry structure, not from synchronicity.
-
-### 8.4 Completion of the Program
-
-We propose that the framework described in this paper constitutes a partial completion of the Pauli-Jung program. Not in the grand metaphysical sense they envisioned — we make no claim about the ultimate nature of reality — but in a precise mathematical sense:
+We propose that this paper constitutes a partial completion of the Pauli-Jung program. Not in the grand metaphysical sense they envisioned, but in a precise mathematical sense:
 
 *The same Noether. The same conservation laws. The same topology. Different coordinates, same invariants.*
 
-The semantic manifold of an LLM is not the physical manifold of spacetime. But both are manifolds. Both have symmetries. Both have conservation laws that follow from those symmetries by Noether's theorem. The archetypes that Jung identified as invariants of the collective unconscious appear as fixed points of RG flow in the semantic manifold — the same mathematical structure as the fixed points of RG flow in quantum field theory.
-
-The bridge Pauli and Jung sought — between the physical and the psychic — may not require mystical unification. It may require only the recognition that Noether's theorem does not care about the substrate. Symmetry implies conservation. Everywhere. Always.
+Both the semantic manifold and the physical manifold are manifolds with symmetries and conservation laws following from those symmetries by Noether's theorem. The archetypes that Jung identified as invariants of the collective unconscious appear as fixed points of RG flow in semantic space — the same mathematical structure as RG fixed points in quantum field theory. The bridge Pauli and Jung sought may not require mystical unification. It may require only the recognition that Noether's theorem does not care about the substrate. Symmetry implies conservation. Everywhere. Always.
 
 ---
 
